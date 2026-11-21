@@ -12,8 +12,9 @@ export const BLOQUES = [
     id: 'historia',
     numero: 1,
     titulo: 'De dónde sale el TNM',
-    minutos: 10,
+    minutos: 8,
     lamina: [
+      { dibujo: { tipo: 'tiempo' } },
       '<b>1932.</b> Cuthbert Dukes, patólogo en Londres, clasifica el cáncer de recto en A, B y C según lo profundo que llega y si hay ganglios. Es la idea de fondo de todo lo que viene después: el pronóstico depende de cuánto se ha extendido el tumor.',
       '<b>1943–1952.</b> Pierre Denoix, cirujano del Institut Gustave-Roussy de París, propone describir cualquier tumor con tres letras: <b>T</b> (tumor primario), <b>N</b> (ganglios, <i>nodes</i>) y <b>M</b> (metástasis).',
       '<b>Años 50 y 60.</b> La Unión Internacional Contra el Cáncer (UICC, Ginebra) adopta el sistema y en 1968 publica el primer librito de bolsillo. En 1959 nace en Estados Unidos el comité que hoy se llama AJCC, que publica su primer manual en 1977.',
@@ -75,15 +76,18 @@ export const BLOQUES = [
     id: 'logica',
     numero: 2,
     titulo: 'La lógica del TNM',
-    minutos: 15,
+    minutos: 12,
     lamina: [
       '<b>T: el tumor primario.</b> En el estómago y el colon, que son tubos, la T no es el tamaño sino <b>hasta qué capa de la pared llega</b>. Un tumor de 6 cm puede ser T1 y uno de 2 cm puede ser T4.',
+      { dibujo: { tipo: 'pared', organo: 'estomago', pie: 'Cada columna es un tumor distinto. La T dice hasta qué capa llega, no cuánto mide.' } },
       '<b>N: los ganglios regionales.</b> En estos dos órganos se cuenta <b>cuántos ganglios tienen tumor</b>. Un ganglio metastásico fuera del territorio regional no es N, es M.',
       '<b>M: metástasis a distancia.</b> M0 o M1. Incluye hígado, pulmón, peritoneo y ganglios no regionales.',
       '<b>X</b> significa «no se puede valorar» (NX). <b>En caso de duda entre dos categorías, se elige la menos avanzada.</b>',
       '<b>Del TNM al estadio.</b> Las combinaciones de T, N y M con pronóstico parecido se agrupan en estadios 0, I, II, III y IV. El TNM describe; el estadio resume.',
       '<b>Prefijos.</b> <b>c</b> = clínico, antes de tratar (exploración, endoscopia, imagen, laparoscopia). <b>p</b> = patológico, con la pieza quirúrgica. <b>yp</b> = patológico después de un tratamiento previo (quimio o radioterapia). <b>r</b> = recidiva. El estadio clínico <b>no se corrige</b> después: se añade el patológico.',
+      { dibujo: { tipo: 'recorrido' } },
       '<b>Clasificación R</b> (lo que queda tras la cirugía): R0 sin tumor residual, R1 tumor microscópico en el margen, R2 tumor residual visible.',
+      { dibujo: { tipo: 'residuo' } },
     ],
     preguntas: [
       {
@@ -140,13 +144,16 @@ export const BLOQUES = [
     id: 'estomago',
     numero: 3,
     titulo: 'Cáncer gástrico: las reglas',
-    minutos: 10,
+    minutos: 8,
     lamina: [
       '<b>La pared, de dentro a fuera:</b> mucosa (epitelio, lámina propia, <i>muscularis mucosae</i>), submucosa, muscular propia, subserosa y serosa (peritoneo visceral).',
       '<b>T.</b> Tis: displasia de alto grado, sin invadir la lámina propia. T1a: lámina propia o <i>muscularis mucosae</i>. T1b: submucosa. T2: muscular propia. T3: subserosa. T4a: atraviesa la serosa. T4b: invade órganos vecinos (páncreas, colon, bazo…).',
       '<b>N</b>, por número de ganglios positivos: N1 = 1–2, N2 = 3–6, N3a = 7–15, N3b = 16 o más. El patólogo debe examinar <b>al menos 16 ganglios</b>.',
+      { dibujo: { tipo: 'ganglios', organo: 'estomago' } },
       '<b>M1:</b> metástasis a distancia, incluida la <b>citología peritoneal positiva</b> y los ganglios no regionales (para-aórticos, por ejemplo).',
+      { dibujo: { tipo: 'metastasis', organo: 'estomago', sitios: ['citologia', 'paraaortico'], pie: 'En el estómago, tanto la citología positiva como los ganglios para-aórticos son M1.' } },
       '<b>Unión esofagogástrica.</b> Si el tumor afecta a la unión y su centro está a 2 cm o menos de ella, se estadifica como esófago. Si el centro está a más de 2 cm, como estómago.',
+      { dibujo: { tipo: 'union' } },
       '<b>Cómo se estadifica antes de operar:</b> endoscopia con biopsia, ecoendoscopia (T y N en tumores precoces), TAC de tórax, abdomen y pelvis (N y M) y laparoscopia de estadificación con lavado peritoneal (M peritoneal).',
       '<b>Dos tablas de estadios.</b> Desde la 8.ª edición, el estadio clínico (cTNM) y el patológico (pTNM) tienen tablas distintas: antes de operar no se pueden contar los ganglios, solo decir si parecen afectados o no.',
     ],
@@ -188,12 +195,15 @@ export const BLOQUES = [
     id: 'colon',
     numero: 4,
     titulo: 'Cáncer de colon: las reglas',
-    minutos: 10,
+    minutos: 8,
     lamina: [
       '<b>T.</b> Tis: carcinoma intramucoso (lámina propia o <i>muscularis mucosae</i>). T1: submucosa. T2: muscular propia. T3: atraviesa la muscular propia hasta la grasa pericólica. T4a: perfora el peritoneo visceral. T4b: invade o está adherido a otros órganos.',
       '<b>Una trampa.</b> Un carcinoma que invade la lámina propia es <b>Tis en el colon</b> pero <b>T1a en el estómago</b>. En la mucosa del colon casi no hay linfáticos, así que ese tumor prácticamente no da metástasis.',
+      { dibujo: { tipo: 'pared', organo: 'colon', resaltar: 'Tis', pie: 'En el colon, lo que no sale de la mucosa es Tis. En el estómago, eso mismo sería T1a.' } },
       '<b>N.</b> N1a: 1 ganglio. N1b: 2–3. N1c: <b>ningún ganglio positivo, pero sí depósitos tumorales</b> (nódulos de tumor en la grasa, sin estructura de ganglio). N2a: 4–6. N2b: 7 o más. Hay que examinar <b>al menos 12 ganglios</b>.',
+      { dibujo: { tipo: 'ganglios', organo: 'colon' } },
       '<b>M.</b> M1a: un órgano, sin peritoneo. M1b: dos o más órganos, sin peritoneo. M1c: peritoneo, con o sin otros órganos.',
+      { dibujo: { tipo: 'metastasis', organo: 'colon', sitios: ['higado', 'pulmon'], pie: 'Hígado y pulmón, sin peritoneo: dos órganos, M1b.' } },
       '<b>Cómo se estadifica:</b> colonoscopia completa con biopsia (y estudio de MMR/MSI), CEA, analítica y TAC de tórax, abdomen y pelvis.',
       '<b>En 2027</b> (todavía no): los depósitos tumorales serán un descriptor propio, M1c se dividirá en M1c1 (solo peritoneo) y M1c2 (peritoneo y otros órganos), y cambiarán los grupos de estadio.',
     ],
@@ -250,6 +260,7 @@ export const CASOS = [
         texto:
           'Mujer de 62 años con dispepsia de meses. En la endoscopia se ve en el antro una lesión deprimida de 1,5 cm, sin úlcera. La biopsia muestra un adenocarcinoma de tipo intestinal, bien diferenciado. En la ecoendoscopia la lesión no pasa de la mucosa y no hay ganglios aumentados. El TAC no muestra nada más.',
       },
+      { dibujo: { tipo: 'pared', organo: 'estomago', resaltar: 'T1a' } },
       {
         pregunta: {
           id: 'c1a',
@@ -347,6 +358,8 @@ export const CASOS = [
         texto:
           'Tras cuatro ciclos, gastrectomía subtotal D2 y cuatro ciclos más. Informe de la pieza: queda tumor que llega a la muscular propia y hay 1 ganglio positivo de 27.',
       },
+      { dibujo: { tipo: 'pared', organo: 'estomago', resaltar: 'T2', pie: 'Tras la quimioterapia, el tumor residual llega a la muscular propia.' } },
+      { dibujo: { tipo: 'ganglios', organo: 'estomago', positivos: 1, total: 27 } },
       {
         pregunta: {
           id: 'c2d',
@@ -374,6 +387,7 @@ export const CASOS = [
         texto:
           'Laparoscopia de estadificación: no se ve ningún implante. En la citología del lavado peritoneal hay células malignas.',
       },
+      { dibujo: { tipo: 'metastasis', organo: 'estomago', sitios: ['citologia'] } },
       {
         pregunta: {
           id: 'c3a',
@@ -422,6 +436,7 @@ export const CASOS = [
         texto:
           'Varón de 70 años con un adenocarcinoma de la parte alta del estómago. Su centro está a 4 cm por debajo de la unión esofagogástrica y no la alcanza.',
       },
+      { dibujo: { tipo: 'union' } },
       {
         pregunta: {
           id: 'c4a',
@@ -436,6 +451,8 @@ export const CASOS = [
         texto:
           'Se hace una gastrectomía total con linfadenectomía D2, sin tratamiento previo. Informe: el tumor atraviesa la muscular propia y llega a la subserosa sin alcanzar la serosa. Hay 9 ganglios positivos de 31. Márgenes libres.',
       },
+      { dibujo: { tipo: 'pared', organo: 'estomago', resaltar: 'T3' } },
+      { dibujo: { tipo: 'ganglios', organo: 'estomago', positivos: 9, total: 31 } },
       {
         pregunta: {
           id: 'c4b',
@@ -472,6 +489,7 @@ export const CASOS = [
         texto:
           'Varón de 61 años con sangre oculta en heces positiva en el programa de cribado. En la colonoscopia hay un pólipo sésil de 2 cm en el sigma, que se reseca entero. La anatomía patológica muestra un adenocarcinoma que invade la submucosa, con invasión linfovascular y un margen de menos de 1 mm.',
       },
+      { dibujo: { tipo: 'pared', organo: 'colon', resaltar: 'T1' } },
       {
         pregunta: {
           id: 'c5a',
@@ -501,6 +519,7 @@ export const CASOS = [
         texto:
           'Sigmoidectomía laparoscópica: no queda tumor en la pared y los 17 ganglios estudiados son negativos.',
       },
+      { dibujo: { tipo: 'ganglios', organo: 'colon', positivos: 0, total: 17 } },
       {
         construir: { organo: 'colon', prefijo: 'p', T: 'T1', N: 'N0', M: 'M0' },
       },
@@ -517,6 +536,8 @@ export const CASOS = [
         texto:
           'Mujer de 74 años con anemia. Se le hace una hemicolectomía izquierda por un adenocarcinoma de colon descendente. Informe: el tumor perfora el peritoneo visceral, pero no invade órganos vecinos. Hay 0 ganglios positivos de 8 examinados.',
       },
+      { dibujo: { tipo: 'pared', organo: 'colon', resaltar: 'T4a' } },
+      { dibujo: { tipo: 'ganglios', organo: 'colon', positivos: 0, total: 8, pie: 'Solo 8 ganglios: por debajo del mínimo de 12.' } },
       {
         pregunta: {
           id: 'c6a',
@@ -573,6 +594,7 @@ export const CASOS = [
         texto:
           'Varón de 66 años operado de un adenocarcinoma de ciego (hemicolectomía derecha). Informe: el tumor atraviesa la muscular propia y llega a la grasa pericólica. Hay 0 ganglios positivos de 23. En la grasa del mesocolon se encuentran 2 nódulos de tumor sin estructura de ganglio: depósitos tumorales.',
       },
+      { dibujo: { tipo: 'ganglios', organo: 'colon', positivos: 0, total: 23, depositos: 2 } },
       {
         pregunta: {
           id: 'c7a',
@@ -633,6 +655,7 @@ export const CASOS = [
         texto:
           'Mujer de 57 años con un adenocarcinoma de sigma. En el TAC hay dos metástasis en el hígado, una en cada lóbulo. No hay nada más.',
       },
+      { dibujo: { tipo: 'metastasis', organo: 'colon', sitios: ['higado'] } },
       {
         pregunta: {
           id: 'c8a',
@@ -672,6 +695,7 @@ export const CASOS = [
         texto:
           'Seis meses después, con buena respuesta, se plantea operar. En la laparoscopia aparecen implantes peritoneales en la pelvis.',
       },
+      { dibujo: { tipo: 'metastasis', organo: 'colon', sitios: ['higado', 'peritoneo'] } },
       {
         pregunta: {
           id: 'c8d',

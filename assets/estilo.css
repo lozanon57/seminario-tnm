@@ -17,6 +17,13 @@
   --bien-fondo: #e8eddf;
   --mal: #8a6a4f;
   --mal-fondo: #f1e7db;
+  --c-mucosa: #f0d9d0;
+  --c-mm: #dcb8a8;
+  --c-sm: #f7efe2;
+  --c-mp: #e3c6b0;
+  --c-ss: #f3e7c9;
+  --c-serosa: #a9987a;
+  --c-vecino: #e2ddd1;
   --reposo: 0 1px 1px rgb(31 29 24 / 3%), 0 6px 18px -12px rgb(31 29 24 / 18%);
   --serif: 'Spectral', ui-serif, Georgia, serif;
   --sans: 'IBM Plex Sans', ui-sans-serif, -apple-system, 'Segoe UI', Roboto, sans-serif;
@@ -41,6 +48,13 @@
     --bien-fondo: #26301f;
     --mal: #d2b08f;
     --mal-fondo: #33291f;
+    --c-mucosa: #4a3530;
+    --c-mm: #61443a;
+    --c-sm: #2f2a23;
+    --c-mp: #4d3b2e;
+    --c-ss: #3a3324;
+    --c-serosa: #7d725d;
+    --c-vecino: #34312b;
     --reposo: 0 1px 1px rgb(0 0 0 / 20%), 0 8px 20px -14px rgb(0 0 0 / 60%);
   }
 }
@@ -282,3 +296,46 @@ button.sutil:hover, button.sutil[aria-pressed='true'] { border-color: var(--file
   .explicacion { animation: aparece .25s ease-out; }
   @keyframes aparece { from { opacity: 0; transform: translateY(-3px); } }
 }
+
+/* ---------- ilustraciones ---------- */
+.dibujo { margin: 1.4rem 0; }
+.dibujo svg { display: block; width: 100%; height: auto; max-width: 34rem; margin: 0 auto; overflow: visible; }
+.dibujo figcaption { max-width: 34rem; margin: .4rem auto 0; font-size: .85rem; color: var(--tinta-media); text-align: center; }
+.d-texto { fill: var(--tinta); font-family: var(--sans); font-size: 13px; }
+.d-peq { font-size: 11.5px; }
+.d-negrita { font-weight: 600; }
+.d-tenue { fill: var(--tinta-media); }
+.d-minio { fill: var(--minio); }
+.d-rotulo { fill: var(--tinta); font-family: var(--mono); font-size: 13px; font-weight: 500; }
+.d-sobre-minio { fill: #fff; }
+.d-titular { fill: var(--tinta); font-family: var(--serif); font-size: 17px; font-weight: 600; }
+.d-filete { stroke: var(--filete-fuerte); stroke-width: 1.5; fill: none; }
+.d-guia { stroke: var(--tinta-tenue); stroke-width: 1; stroke-dasharray: 2 3; }
+.d-tumor { fill: var(--minio); }
+.columna.tenue { opacity: .22; }
+.c-mucosa { fill: var(--c-mucosa); } .c-mm { fill: var(--c-mm); } .c-sm { fill: var(--c-sm); }
+.c-mp { fill: var(--c-mp); } .c-ss { fill: var(--c-ss); } .c-serosa { fill: var(--c-serosa); } .c-vecino { fill: var(--c-vecino); }
+.d-ganglio { fill: var(--papel-alto); stroke: var(--tinta-tenue); stroke-width: 1.5; }
+.d-ganglio-pos { fill: var(--minio); stroke: var(--minio); stroke-width: 1.5; }
+.d-deposito { fill: none; stroke: var(--minio); stroke-width: 2; }
+.d-escala { fill: var(--papel-hondo); stroke: var(--filete-fuerte); }
+.d-escala.activa { fill: var(--minio); stroke: var(--minio); }
+.d-cuerpo { fill: var(--papel-hondo); stroke: var(--filete-fuerte); stroke-width: 1.5; }
+.d-sitio { fill: var(--papel-alto); stroke: var(--tinta-tenue); stroke-width: 1.2; }
+.d-sitio.activo { fill: var(--minio-suave); stroke: var(--minio); stroke-width: 2; }
+.d-peritoneo { fill: none; stroke: var(--tinta-tenue); stroke-width: 1.2; stroke-dasharray: 4 4; }
+.d-peritoneo.activo { stroke: var(--minio); stroke-width: 2; }
+.d-aorta { stroke: var(--tinta-media); stroke-width: 4; stroke-linecap: round; }
+.d-gotas circle { fill: var(--minio); }
+.d-hito { fill: var(--minio); }
+.d-hito-futuro { fill: var(--papel); stroke: var(--minio); stroke-width: 2; stroke-dasharray: 2 2; }
+.d-caja { fill: var(--papel-alto); stroke: var(--filete-fuerte); }
+.d-caja-opcional { fill: none; stroke: var(--filete-fuerte); stroke-dasharray: 5 4; }
+.d-sello { fill: var(--minio); }
+.d-flecha { fill: none; stroke: var(--tinta-media); stroke-width: 1.5; }
+.d-pieza { fill: var(--c-ss); }
+.d-tinta-margen { fill: none; stroke: var(--tinta); stroke-width: 3.5; }
+.d-residuo { opacity: .85; }
+.d-organo { fill: var(--c-mucosa); stroke: var(--tinta-media); stroke-width: 1.5; }
+.d-franja { fill: var(--minio); opacity: .12; }
+.d-corte { stroke: var(--tinta); stroke-width: 1.5; stroke-dasharray: 6 4; }

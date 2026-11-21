@@ -1,5 +1,6 @@
 import { BLOQUES, CASOS, CHULETA } from './contenido.js'
 import { TODAS, ORDEN } from './orden.js'
+import { dibujo } from './dibujos.js'
 import { CATEGORIAS, estadio } from './estadios.js'
 import { leer, guardarRespuesta, guardarConstruccion, borrarTodo, preferencia } from './progreso.js'
 
@@ -129,7 +130,7 @@ function vistaBloque(id) {
     <article class="lamina">
       <p class="antetitulo">Bloque ${b.numero} de ${BLOQUES.length}</p>
       <h1>${esc(b.titulo)}</h1>
-      ${b.lamina.map((p) => `<p>${p}</p>`).join('')}
+      ${b.lamina.map((p) => (typeof p === 'string' ? `<p>${p}</p>` : dibujo(p.dibujo))).join('')}
     </article>
     <section class="preguntas"><h2>Comprueba</h2>${b.preguntas.map((p) => htmlPregunta(p, progreso.respuestas)).join('')}</section>
     <nav class="pasar"><a href="#/">Índice</a><a class="boton" href="${siguiente}">${BLOQUES[i + 1] ? 'Siguiente bloque' : 'Ir a los casos'} →</a></nav>`
@@ -142,6 +143,7 @@ function vistaCaso(id) {
   const pasos = []
   for (const paso of caso.pasos) {
     if (paso.texto) pasos.push(`<p class="relato">${esc(paso.texto)}</p>`)
+    if (paso.dibujo) pasos.push(dibujo(paso.dibujo))
     if (paso.pregunta) pasos.push(htmlPregunta(paso.pregunta, progreso.respuestas))
     if (paso.construir) pasos.push(htmlConstruir(caso, paso.construir, progreso.construcciones[caso.id]))
     const pendiente = paso.pregunta ? progreso.respuestas[paso.pregunta.id] === undefined : paso.construir && !progreso.construcciones[caso.id]
