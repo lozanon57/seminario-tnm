@@ -10,6 +10,7 @@
 export const BLOQUES = [
   {
     id: 'historia',
+    clave: 'El TNM es un acuerdo internacional que se revisa con datos de supervivencia. Usa siempre la edición vigente: hoy, AJCC 8.ª / UICC 9.ª.',
     numero: 1,
     titulo: 'De dónde sale el TNM',
     minutos: 8,
@@ -74,6 +75,7 @@ export const BLOQUES = [
   },
   {
     id: 'logica',
+    clave: 'T es profundidad, N son ganglios regionales contados y M es lo que está a distancia. El prefijo dice cuándo: c antes de tratar, p o yp con la pieza, r en la recidiva.',
     numero: 2,
     titulo: 'La lógica del TNM',
     minutos: 12,
@@ -142,6 +144,7 @@ export const BLOQUES = [
   },
   {
     id: 'estomago',
+    clave: 'Estómago: N1 1–2, N2 3–6, N3a 7–15, N3b 16 o más. Hacen falta al menos 16 ganglios, y la citología peritoneal positiva ya es M1.',
     numero: 3,
     titulo: 'Cáncer gástrico: las reglas',
     minutos: 8,
@@ -193,6 +196,7 @@ export const BLOQUES = [
   },
   {
     id: 'colon',
+    clave: 'Colon: lo intramucoso es Tis, N1c son depósitos sin ganglios positivos, hacen falta al menos 12 ganglios y el peritoneo es M1c.',
     numero: 4,
     titulo: 'Cáncer de colon: las reglas',
     minutos: 8,
@@ -251,6 +255,7 @@ export const BLOQUES = [
 export const CASOS = [
   {
     id: 'c1',
+    clave: 'Un T1a pequeño, bien diferenciado y sin úlcera se trata por endoscopia: estadificar bien le ahorra una gastrectomía.',
     numero: 1,
     organo: 'estomago',
     titulo: 'Lo que encontró una endoscopia por dispepsia',
@@ -303,6 +308,7 @@ export const CASOS = [
   },
   {
     id: 'c2',
+    clave: 'La laparoscopia completa el estadio clínico y la y avisa de que hubo tratamiento previo: de cT3 cN+ a ypT2 N1 es ver la respuesta.',
     numero: 2,
     organo: 'estomago',
     titulo: 'Pérdida de peso y anemia',
@@ -374,6 +380,7 @@ export const CASOS = [
   },
   {
     id: 'c3',
+    clave: 'Citología peritoneal positiva = M1 = estadio IV, aunque el TAC esté limpio.',
     numero: 3,
     organo: 'estomago',
     titulo: 'Un TAC limpio que no lo era',
@@ -427,6 +434,7 @@ export const CASOS = [
   },
   {
     id: 'c4',
+    clave: 'Centro a más de 2 cm de la unión: estómago. 9 de 31 ganglios es N3a, y pT3 N3a M0 es estadio IIIB.',
     numero: 4,
     organo: 'estomago',
     titulo: 'Del informe de patología al estadio',
@@ -480,6 +488,7 @@ export const CASOS = [
   },
   {
     id: 'c5',
+    clave: 'En el colon, llegar a la submucosa ya es T1, y con factores de riesgo la polipectomía no basta.',
     numero: 5,
     organo: 'colon',
     titulo: 'Un pólipo del cribado',
@@ -527,6 +536,7 @@ export const CASOS = [
   },
   {
     id: 'c6',
+    clave: 'Con menos de 12 ganglios el N0 no es fiable y cuenta como factor de alto riesgo en el estadio II.',
     numero: 6,
     organo: 'colon',
     titulo: 'Un estadio II que preocupa',
@@ -585,6 +595,7 @@ export const CASOS = [
   },
   {
     id: 'c7',
+    clave: 'Depósitos tumorales sin ganglios positivos = N1c: el paciente pasa de estadio II a III y recibe quimioterapia.',
     numero: 7,
     organo: 'colon',
     titulo: 'Ningún ganglio y, sin embargo, estadio III',
@@ -646,6 +657,7 @@ export const CASOS = [
   },
   {
     id: 'c8',
+    clave: 'La M cuenta órganos, no lesiones. En cuanto hay peritoneo, es M1c.',
     numero: 8,
     organo: 'colon',
     titulo: 'Metástasis: dónde importa tanto como cuántas',
