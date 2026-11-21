@@ -249,13 +249,13 @@ h2 { font-size: 1.35rem; font-weight: 700; margin: 2.2rem 0 .9rem; }
 .opcion.apagada { opacity: .45; }
 .opcion:disabled { cursor: default; }
 
-.veredicto { margin-top: 1rem; padding: 1rem 1.1rem; border-radius: 16px; }
-.veredicto p { margin: .3rem 0 0; }
-.veredicto .titular { margin: 0; font-family: var(--display); font-weight: 800; font-size: 1.2rem; }
+.veredicto { margin-top: 1rem; padding: 1.1rem 1.2rem; border-radius: 16px; font-size: 1.15rem; line-height: 1.55; }
+.veredicto p { margin: .4rem 0 0; }
+.veredicto .titular { margin: 0; font-family: var(--display); font-weight: 800; font-size: 1.35rem; }
 .veredicto.bien { background: var(--bien-fondo); } .veredicto.bien .titular { color: var(--bien); }
 .veredicto.mal { background: var(--mal-fondo); } .veredicto.mal .titular { color: var(--mal); }
 .veredicto ul { margin: .5rem 0 0; padding-left: 1.1rem; }
-.matiz { margin-top: .6rem !important; padding: .5rem .7rem; border-radius: 10px; background: var(--duda-fondo); font-size: .92rem; font-weight: 500; }
+.matiz { margin-top: .6rem !important; padding: .5rem .7rem; border-radius: 10px; background: var(--duda-fondo); font-size: 1.02rem; font-weight: 500; }
 
 /* construir el TNM */
 .contexto { font-size: .95rem; color: var(--tinta-media); padding: .7rem .9rem; border-radius: 12px; background: var(--superficie-2); }
@@ -303,6 +303,7 @@ h2 { font-size: 1.35rem; font-weight: 700; margin: 2.2rem 0 .9rem; }
   .rotulo { padding-top: 0; }
   .carta { margin: .2rem .6rem .8rem; padding: 1.3rem 1.05rem 1.4rem; border-radius: 20px; }
   .idea { font-size: 1.2rem; }
+  .veredicto { font-size: 1.1rem; }
   .marca span { display: none; }
 }
 
