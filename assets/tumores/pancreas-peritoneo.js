@@ -19,9 +19,9 @@ const CA_PANCREAS = {
     {
       titulo: 'Epidemiología y factores de riesgo',
       puntos: [
-        'Es la 9.ª causa de cáncer pero la 4.ª en mortalidad; unos 4000 casos al año en España, sobre todo en la 6.ª-7.ª década y algo más en varones.',
+        'Es poco frecuente pero está entre las primeras causas de muerte por cáncer (3.ª-4.ª); más de 9000 casos al año en España, sobre todo en la 6.ª-7.ª década y algo más en varones.',
         'Supervivencia global a 5 años en torno al <b>5 %</b>; incluso tras resección, solo el 10-20 % vive 5 años en las grandes series (datos de la clase).',
-        'El <b>tabaco</b> es el factor ambiental principal (triplica el riesgo). Otros: pancreatitis crónica, obesidad y <b>diabetes de reciente aparición</b>.',
+        'El <b>tabaco</b> es el factor ambiental principal (casi duplica el riesgo). Otros: pancreatitis crónica, obesidad y <b>diabetes de reciente aparición</b>.',
         'Desconfía de la diabetes nueva en un anciano, en un paciente delgado o que pierde peso, o sin antecedentes familiares de diabetes: puede ser la primera manifestación del tumor.',
         'Síndromes hereditarios: pancreatitis hereditaria (PRSS1), Peutz-Jeghers (STK11), melanoma múltiple familiar (CDKN2A), fibrosis quística, BRCA2, Lynch y poliposis adenomatosa familiar.',
       ],
@@ -155,7 +155,7 @@ const CA_PANCREAS = {
   ],
   tarjetas: [
     { a: '¿Qué oncogén está mutado en más del 90 % de los adenocarcinomas de páncreas?', r: 'K-ras.' },
-    { a: '¿Cuál es el principal factor de riesgo ambiental?', r: 'El tabaco: triplica el riesgo respecto a los no fumadores.' },
+    { a: '¿Cuál es el principal factor de riesgo ambiental?', r: 'El tabaco: casi duplica el riesgo respecto a los no fumadores.' },
     { a: '¿Qué es el signo de Courvoisier-Terrier?', r: 'Vesícula palpable, distendida e indolora en un paciente ictérico; sugiere obstrucción tumoral distal.' },
     { a: '¿Prueba de elección para diagnosticar y estadificar?', r: 'TC toracoabdominopélvica con contraste, con protocolo de páncreas.' },
     { a: '¿Prueba de elección para obtener la biopsia?', r: 'Ecoendoscopia con punción.' },
@@ -526,7 +526,7 @@ const QUISTICOS = {
       titulo: 'Criterios de riesgo del TPMI',
       puntos: [
         '<b>Alto riesgo</b> (indican cirugía): ictericia obstructiva, componente sólido que capta contraste y conducto pancreático principal de 10 mm o más.',
-        '<b>Preocupantes</b> (piden ecoendoscopia): quiste de 3 cm o más, conducto principal de 5-9 mm, nódulo mural que no capta, pared engrosada o que capta, cambio brusco de calibre con atrofia distal, adenopatías y pancreatitis.',
+        '<b>Preocupantes</b> (piden ecoendoscopia): quiste de 3 cm o más, conducto principal de 5-9 mm, nódulo mural que capta de menos de 5 mm, pared engrosada o que capta, cambio brusco de calibre con atrofia distal, adenopatías y pancreatitis.',
         'El TPMI de <b>conducto principal</b> maligniza mucho más que el de rama secundaria: por eso un conducto dilatado pesa tanto.',
         'Tras la ecoendoscopia se opera si hay un nódulo mural definido, sospecha de afectación del conducto principal o citología sospechosa de malignidad.',
       ],
@@ -734,7 +734,7 @@ const TNE_PANCREAS = {
       puntos: [
         '<b>Insulinoma</b>: el funcionante más frecuente; único, pequeño y benigno en el 90 %. Hipoglucemia con el ayuno o el ejercicio: síntomas neuroglucopénicos (confusión, convulsiones) y vegetativos (sudoración, mareo).',
         '<b>Gastrinoma</b>: síndrome de <b>Zollinger-Ellison</b>, con úlceras pépticas múltiples o recidivantes y diarrea por hipersecreción ácida; suele ser pequeño y estar en el triángulo del gastrinoma.',
-        '<b>VIPoma</b> (Verner-Morrison): diarrea acuosa masiva (más de 5 litros al día), hipopotasemia, acidosis metabólica e hipo- o aclorhidria; grande, en la cola, maligno en dos tercios.',
+        '<b>VIPoma</b> (Verner-Morrison): diarrea acuosa masiva (más de 3 litros al día), hipopotasemia, acidosis metabólica e hipo- o aclorhidria; grande, en la cola, maligno en dos tercios.',
         '<b>Glucagonoma</b>: eritema necrolítico migratorio, diabetes, pérdida de peso, anemia e hipoalbuminemia; grande, en la cola y casi siempre maligno.',
         '<b>Somatostatinoma</b>: colelitiasis, diabetes, diarrea con esteatorrea, pérdida de peso e <b>hipoclorhidria</b>; en duodeno y cabeza. La diapositiva dice hiperclorhidria: es una errata.',
         '<b>No funcionantes</b>: no dan síndrome hormonal; se descubren por casualidad o por efecto masa (dolor, ictericia) o por metástasis.',
@@ -777,7 +777,7 @@ const TNE_PANCREAS = {
             { texto: 'Hipoglucemia en ayunas', detalle: 'Confusión, sudoración; cede al comer' },
             { texto: 'Tríada de Whipple', detalle: 'Síntomas, glucemia < 55, alivio con glucosa' },
             { texto: 'Ayuno de 72 horas', detalle: 'Insulina y péptido C no se suprimen' },
-            { texto: 'Localizar el tumor', detalle: 'TC, ecoendoscopia, colangio-RM' },
+            { texto: 'Localizar el tumor', detalle: 'TC, RM y ecoendoscopia' },
             { texto: 'Enucleación si es posible', detalle: 'Si no se ve, no se reseca a ciegas' },
           ],
           pie: 'Del síntoma al quirófano en el insulinoma.',
@@ -1329,7 +1329,7 @@ const RETROPERITONEO = {
         'Hematoma retroperitoneal de la zona 1',
       ],
       correcta: 0,
-      explicacion: 'En un joven con una masa retroperitoneal hay que descartar un tumor germinal (metástasis ganglionar de un tumor de testículo): exploración testicular, AFP y β-HCG, porque se trata con quimioterapia, no con cirugía de entrada. El liposarcoma es propio de adultos de 50-60 años. La fibrosis retroperitoneal es una placa mal delimitada que engloba los uréteres y exige un antecedente farmacológico o autoinmune. El hematoma requiere traumatismo o anticoagulación.',
+      explicacion: 'En un joven con una masa retroperitoneal hay que descartar un tumor germinal (metástasis ganglionar de un tumor de testículo): exploración testicular, AFP y β-HCG, porque se trata con quimioterapia, no con cirugía de entrada. El liposarcoma es propio de adultos de 50-60 años. La fibrosis retroperitoneal es una placa periaórtica mal delimitada que engloba los uréteres, casi siempre idiopática, no una masa definida de 8 cm. El hematoma requiere traumatismo o anticoagulación.',
     },
     {
       id: 'tumores-retroperitoneo-3',

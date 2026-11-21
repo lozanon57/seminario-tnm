@@ -562,7 +562,7 @@ export const TUMORES_ESOFAGO_ESTOMAGO = [
         puntos: [
           '<b>Resección endoscópica</b> (mucosectomía o disección submucosa) en el cáncer precoz con bajo riesgo ganglionar: <b>Tis o T1a</b>, bien diferenciado, <b>menor de 2 cm</b> y <b>no ulcerado</b>.',
           'El tratamiento curativo estándar es la <b>gastrectomía con márgenes libres</b>: subtotal en los tumores distales y total en los proximales. Abierta o mínimamente invasiva, con iguales resultados oncológicos.',
-          '<b>D1</b>: ganglios perigástricos. <b>D2</b>: además, los de la gástrica izquierda, hepática común, tronco celíaco y esplénica. Se busca examinar <b>16 o más ganglios</b>; la esplenectomía sistemática no está indicada.',
+          '<b>D1</b>: ganglios perigástricos y de la gástrica izquierda (grupos 1–7). <b>D2</b>: además, hepática común, tronco celíaco, esplénica y ligamento hepatoduodenal. Se busca examinar <b>16 o más ganglios</b>; la esplenectomía sistemática no está indicada.',
           'Desde <b>T2 o con ganglios</b>: <b>quimioterapia perioperatoria</b>, antes y después de operar. La clase muestra el ensayo MAGIC (ECF frente a cirugía sola); hoy el esquema más usado en Europa es <b>FLOT</b>.',
           'La clase muestra también la <b>quimiorradioterapia postoperatoria</b> (Macdonald, 2001), una opción si el paciente se operó sin tratamiento previo y tiene alto riesgo de recaída.',
           '<b>Irresecable o metastásico</b>: quimioterapia, mejor que el tratamiento de soporte. Obstrucción o hemorragia: endoscopia, radioterapia hemostática o cirugía paliativa. Si tras la neoadyuvancia es posible un R0, se opera.',
@@ -571,8 +571,8 @@ export const TUMORES_ESOFAGO_ESTOMAGO = [
           tipo: 'comparar',
           columnas: ['', 'D1', 'D2'],
           filas: [
-            ['Qué incluye', 'Ganglios perigástricos', 'D1 y ganglios del tronco celíaco'],
-            ['Arterias', 'Ninguna adicional', 'Gástrica izquierda, hepática común, esplénica'],
+            ['Qué incluye', 'Perigástricos y gástrica izquierda (1–7)', 'D1 y los de los troncos arteriales'],
+            ['Arterias', 'Gástrica izquierda', 'Además hepática común, tronco celíaco y esplénica'],
             ['Bazo', 'Se conserva', 'Se conserva salvo invasión'],
           ],
           pie: 'Objetivo de ambas: examinar al menos 16 ganglios.',
@@ -623,7 +623,7 @@ export const TUMORES_ESOFAGO_ESTOMAGO = [
       { a: '¿Qué es un tumor de Krukenberg?', r: 'Una metástasis ovárica, clásicamente de un adenocarcinoma gástrico.' },
       { a: '¿Cuándo se indica la laparoscopia de estadificación?', r: 'En tumores cT3 o cN+ candidatos a cirugía, con citología del lavado peritoneal.' },
       { a: 'Criterios clásicos de resección endoscópica del cáncer gástrico', r: 'Tis o T1a, bien diferenciado, menor de 2 cm y no ulcerado.' },
-      { a: '¿Qué añade la linfadenectomía D2 a la D1?', r: 'Los ganglios de la gástrica izquierda, hepática común, tronco celíaco y esplénica.' },
+      { a: '¿Qué añade la linfadenectomía D2 a la D1?', r: 'Los ganglios de la hepática común, el tronco celíaco, la esplénica y el ligamento hepatoduodenal.' },
       { a: '¿Cuántos ganglios hay que examinar, como mínimo, en una gastrectomía?', r: 'Dieciséis.' },
       { a: '¿Se extirpan los pólipos fúndicos asociados a IBP?', r: 'No: son una hiperplasia benigna secundaria a los IBP.' },
     ],

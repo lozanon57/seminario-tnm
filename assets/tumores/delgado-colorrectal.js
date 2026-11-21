@@ -47,7 +47,7 @@ export const TUMORES_DELGADO_COLORRECTAL = [
           'El <b>GIST</b> deriva de las <b>células intersticiales de Cajal</b> (el marcapasos intestinal), nace en la muscular propia y suele crecer hacia fuera de la luz (extraluminal).',
           'El GIST se reconoce por <b>CD117</b> (KIT) en la inmunohistoquímica: la mayoría tienen mutación de <i>KIT</i>, unos pocos de <i>PDGFRA</i> y un 10-15 % ninguna (<i>wild type</i>).',
           'El GIST se extiende por invasión local, por <b>vía hematógena</b> (sobre todo al hígado) y al peritoneo; la diseminación linfática es <b>rara</b>.',
-          'El <b>linfoma</b> predomina en el <b>íleon</b>, donde hay más tejido linfoide. Es más frecuente en celíacos e inmunodeprimidos, se diagnostica grande (más de 5 cm) e infiltra la pared de forma difusa.',
+          'El <b>linfoma</b> predomina en el <b>íleon</b>, donde hay más tejido linfoide. Es más frecuente en celíacos (en ellos, sobre todo yeyunal) e inmunodeprimidos, se diagnostica grande (más de 5 cm) e infiltra la pared de forma difusa.',
         ],
         dibujo: {
           tipo: 'comparar',
@@ -66,7 +66,7 @@ export const TUMORES_DELGADO_COLORRECTAL = [
         puntos: [
           'Los síntomas son <b>vagos e inespecíficos</b>: dispepsia, anorexia, diarrea a veces con moco, dolor cólico, pérdida de peso o una masa abdominal.',
           'Lo típico es la <b>suboclusión intestinal</b> de repetición, por estenosis tumoral o por <b>invaginación</b> (intususcepción): un pólipo hace de cabeza y arrastra el asa dentro de la siguiente.',
-          'También sangran: en general como <b>hematoquecia</b> o como anemia ferropénica sin causa en la gastroscopia ni en la colonoscopia.',
+          'También sangran: como <b>melenas</b>, a veces hematoquecia, o como anemia ferropénica sin causa en la gastroscopia ni en la colonoscopia.',
           'El linfoma intestinal puede <b>perforarse</b> (la clase lo cifra en el 25 %), a veces al iniciar la quimioterapia; la fiebre es poco habitual.',
         ],
         dibujo: {
@@ -150,7 +150,7 @@ export const TUMORES_DELGADO_COLORRECTAL = [
           'Adenocarcinoma: <b>proximal</b>. Neuroendocrino y linfoma: <b>distales</b> (íleon). El maligno más frecuente es el adenocarcinoma (40 %).',
           'GIST: nace en la <b>muscular propia</b>, crece extraluminal, se marca con <b>CD117</b> y casi nunca da ganglios, así que <b>no se hace linfadenectomía</b>.',
           'Íleon terminal = <b>hemicolectomía derecha</b>, porque comparte drenaje con el ciego a través de los vasos ileocólicos.',
-          'Celíaco con suboclusión o perforación ileal: piensa en <b>linfoma</b>. Crohn de larga evolución con estenosis que no cede: piensa también en <b>adenocarcinoma</b>.',
+          'Celíaco con suboclusión o perforación intestinal (típicamente yeyunal): piensa en <b>linfoma</b>. Crohn de larga evolución con estenosis que no cede: piensa también en <b>adenocarcinoma</b>.',
           'Una invaginación intestinal en el adulto obliga a buscar la lesión que hace de cabeza: pólipos de Peutz-Jeghers, lipomas o tumores malignos.',
         ],
       },
@@ -159,7 +159,7 @@ export const TUMORES_DELGADO_COLORRECTAL = [
       { a: '¿Cuál es el tumor maligno más frecuente del intestino delgado?', r: 'El adenocarcinoma (40 %), sobre todo en el duodeno y el intestino proximal.' },
       { a: '¿Dónde predomina el linfoma intestinal y por qué?', r: 'En el íleon, porque es donde hay más tejido linfoide (placas de Peyer).' },
       { a: '¿De qué células deriva el GIST?', r: 'De las células intersticiales de Cajal, el marcapasos del intestino.' },
-      { a: '¿Qué marcador inmunohistoquímico identifica el GIST?', r: 'CD117, el epítopo extracelular de la proteína KIT.' },
+      { a: '¿Qué marcador inmunohistoquímico identifica el GIST?', r: 'CD117, que es la propia proteína KIT.' },
       { a: '¿Por qué no se hace linfadenectomía en el GIST?', r: 'Porque disemina por vía hematógena y peritoneal; la afectación ganglionar es rara.' },
       { a: '¿Qué cirugía requiere un adenocarcinoma de íleon terminal?', r: 'Hemicolectomía derecha, con ligadura de los vasos ileocólicos en su origen.' },
       { a: '¿Qué cirugía requiere un adenocarcinoma duodenal, según la clase?', r: 'Duodenopancreatectomía cefálica con linfadenectomía regional.' },
@@ -208,7 +208,7 @@ export const TUMORES_DELGADO_COLORRECTAL = [
       },
       {
         id: 'tumores-delgado-4',
-        enunciado: 'Varón celíaco de 55 años con anorexia, pérdida de peso y dolor abdominal. La TC muestra un engrosamiento difuso de 8 cm de la pared ileal y la biopsia confirma un linfoma. ¿Cuál es el tratamiento de elección?',
+        enunciado: 'Varón celíaco de 55 años con anorexia, pérdida de peso y dolor abdominal. La TC muestra un engrosamiento difuso de 8 cm de la pared yeyunal y la biopsia confirma un linfoma. ¿Cuál es el tratamiento de elección?',
         opciones: [
           'Quimioterapia, reservando la cirugía para las complicaciones',
           'Resección ileal con linfadenectomía de al menos 8 ganglios',
@@ -260,7 +260,7 @@ export const TUMORES_DELGADO_COLORRECTAL = [
       {
         titulo: 'Epidemiología y origen',
         puntos: [
-          'Son <b>raros</b> (unos 2 casos por 100.000) y de <b>crecimiento lento</b>. Oberndorfer los llamó en 1907 <i>Karzinoide</i>, «parecido a un carcinoma»: de ahí el nombre clásico de carcinoide.',
+          'Son <b>raros</b> y de <b>crecimiento lento</b>. Oberndorfer los llamó en 1907 <i>Karzinoide</i>, «parecido a un carcinoma»: de ahí el nombre clásico de carcinoide.',
           'Nacen de las <b>células neuroendocrinas</b> (argentafines o de Kulchitsky) del fondo de las glándulas. Expresan citoqueratinas y CDX2, lo que apunta a un origen epitelial más que de la cresta neural.',
           'Se agrupan por origen embrionario: <b>intestino anterior</b> 25 %, <b>intestino medio</b> 50 % (delgado, apéndice, colon proximal) e <b>intestino posterior</b> 15 % (colon distal y recto).',
           'En el delgado suponen el 20 % de los tumores malignos y predominan en la porción <b>distal</b> (íleon).',
@@ -333,7 +333,7 @@ export const TUMORES_DELGADO_COLORRECTAL = [
       {
         titulo: 'Tratamiento',
         puntos: [
-          'La <b>cirugía es el único tratamiento curativo</b>: resección intestinal con su mesenterio según la afectación. En NET G1 pequeños puede bastar la resección local.',
+          'La <b>cirugía es el único tratamiento curativo</b>: resección intestinal con su mesenterio. En el íleon se hace aunque el tumor sea pequeño, porque da ganglios pronto; la resección local queda para NET pequeños de recto o duodeno.',
           'En enfermedad avanzada con metástasis, la <b>citorreducción</b> es el mejor tratamiento paliativo, porque reduce la masa que segrega hormonas.',
           'Metástasis hepáticas irresecables: citorreducción máxima, <b>quimioembolización</b>, radioembolización o incluso trasplante hepático en casos seleccionados. En las recurrencias, valorar resección.',
           'Tratamiento médico: los <b>análogos de somatostatina</b> (octreótido, lanreótido) son el estándar para controlar síntomas y frenar la progresión; la quimioterapia es poco útil.',
@@ -436,7 +436,7 @@ export const TUMORES_DELGADO_COLORRECTAL = [
           'Resección local del nódulo submucoso',
         ],
         correcta: 0,
-        explicacion: 'La cirugía es el único tratamiento curativo de los NET, y con ganglios afectados hay que resecar el asa con su mesenterio. Los análogos de somatostatina controlan síntomas y frenan la enfermedad avanzada, pero no curan un tumor resecable. Los platinos son para el carcinoma neuroendocrino pobremente diferenciado, no para un G1, y en los NET la quimioterapia es poco útil. La resección local solo vale para lesiones pequeñas G1 sin ganglios; aquí dejaría la enfermedad mesentérica.',
+        explicacion: 'La cirugía es el único tratamiento curativo de los NET, y con ganglios afectados hay que resecar el asa con su mesenterio. Los análogos de somatostatina controlan síntomas y frenan la enfermedad avanzada, pero no curan un tumor resecable. Los platinos son para el carcinoma neuroendocrino pobremente diferenciado, no para un G1, y en los NET la quimioterapia es poco útil. La resección local no es oncológica en el íleon, donde incluso los NET pequeños dan ganglios; aquí dejaría la enfermedad mesentérica.',
       },
       {
         id: 'tne-intestinales-5',
@@ -567,14 +567,14 @@ export const TUMORES_DELGADO_COLORRECTAL = [
           'Su marca son las <b>manchas pigmentadas</b> en labios, mucosa bucal, región perianal, antebrazos, palmas y plantas. Los pólipos sangran u obstruyen por <b>invaginación</b>.',
           'Peutz-Jeghers aumenta el riesgo de cáncer digestivo (sobre todo de delgado) y extradigestivo: mama, ovario y trompa, cérvix, tiroides, pulmón y testículo. Los pólipos de más de 1,5 cm se extirpan.',
           'Si hay que operar, se extirpan cuantos pólipos sea posible combinando cirugía y endoscopia, para <b>ahorrar intestino</b>.',
-          '<b>Poliposis juvenil</b>: autosómica dominante, con mutación de <b><i>SMAD4</i></b> en la mitad de los casos. Hamartomas con glándulas quísticas en colon, delgado y estómago: hemorragia, invaginación e <b>hipoalbuminemia</b> por pérdida de proteínas.',
+          '<b>Poliposis juvenil</b>: autosómica dominante, con mutación de <b><i>SMAD4</i></b> o <b><i>BMPR1A</i></b> en cerca de la mitad de los casos. Hamartomas con glándulas quísticas en colon, delgado y estómago: hemorragia, invaginación e <b>hipoalbuminemia</b> por pérdida de proteínas.',
           'Juvenil: si hay pocos pólipos, extirpación endoscópica; si hay muchos, colectomía total con anastomosis ileorrectal, o proctocolectomía con reservorio ileoanal si el recto está afectado.',
         ],
         dibujo: {
           tipo: 'comparar',
           columnas: ['', 'Peutz-Jeghers', 'Poliposis juvenil'],
           filas: [
-            ['Gen', 'STK11/LKB1', 'SMAD4 (la mitad)'],
+            ['Gen', 'STK11/LKB1', 'SMAD4 o BMPR1A'],
             ['Herencia', 'Autosómica dominante', 'Autosómica dominante'],
             ['Pólipos', 'Hamartomas, más en delgado', 'Quísticos, más en colon'],
             ['Pista clínica', 'Manchas en labios y boca', 'Hipoalbuminemia'],
@@ -603,7 +603,7 @@ export const TUMORES_DELGADO_COLORRECTAL = [
       { a: '¿Cuál es el tumor extracolónico más típico del Lynch?', r: 'El cáncer de endometrio.' },
       { a: '¿Qué gen causa el síndrome de Peutz-Jeghers?', r: 'STK11/LKB1, un gen supresor del cromosoma 19.' },
       { a: '¿Qué pólipos del Peutz-Jeghers deben extirparse?', r: 'Los de más de 1,5 cm.' },
-      { a: '¿Qué gen muta en la mitad de las poliposis juveniles?', r: 'SMAD4, un gen supresor.' },
+      { a: '¿Qué genes mutan en la poliposis juvenil?', r: 'SMAD4 o BMPR1A, de la vía del TGF-beta; entre los dos, cerca de la mitad de los casos.' },
       { a: '¿Qué cirugía necesita una PAF con el recto lleno de pólipos?', r: 'Proctocolectomía total con reservorio ileal y anastomosis ileoanal.' },
     ],
     preguntas: [
@@ -667,7 +667,7 @@ export const TUMORES_DELGADO_COLORRECTAL = [
         enunciado: 'Niño de 8 años con rectorragia, edemas e hipoalbuminemia. La colonoscopia muestra decenas de pólipos con glándulas quísticamente dilatadas en un estroma de la lámina propia. ¿Qué diagnóstico es el más probable?',
         opciones: ['Poliposis juvenil', 'Poliposis adenomatosa familiar', 'Síndrome de Lynch', 'Síndrome de Gardner'],
         correcta: 0,
-        explicacion: 'Hamartomas con glándulas quísticas, hemorragia e hipoalbuminemia por pérdida intestinal de proteínas son la poliposis juvenil, con mutación de SMAD4 en la mitad de los casos. La PAF produce adenomas, no hamartomas quísticos, y no se acompaña de pérdida de proteínas. Lynch es no polipósico y se manifiesta como cáncer en el adulto. Gardner es una variante de la PAF, con adenomas más osteomas, quistes epidérmicos y desmoides.',
+        explicacion: 'Hamartomas con glándulas quísticas, hemorragia e hipoalbuminemia por pérdida intestinal de proteínas son la poliposis juvenil, con mutación de SMAD4 o BMPR1A en cerca de la mitad de los casos. La PAF produce adenomas, no hamartomas quísticos, y no se acompaña de pérdida de proteínas. Lynch es no polipósico y se manifiesta como cáncer en el adulto. Gardner es una variante de la PAF, con adenomas más osteomas, quistes epidérmicos y desmoides.',
       },
     ],
     fuentes: [
@@ -697,7 +697,7 @@ export const TUMORES_DELGADO_COLORRECTAL = [
         titulo: 'Epidemiología y cribado',
         puntos: [
           'Sumando ambos sexos, es el <b>primer cáncer en incidencia y el segundo en mortalidad</b>; en varones va tras el de próstata y en mujeres tras el de mama (cifras SEOM 2024 de la clase).',
-          'Afecta por igual a ambos sexos y la gran mayoría de los casos aparecen por encima de los 50 años, aunque crece en adultos jóvenes.',
+          'Es algo más frecuente en varones y la gran mayoría de los casos aparecen por encima de los 50 años, aunque crece en adultos jóvenes.',
           'La <b>mayoría son esporádicos</b>; una minoría son hereditarios (PAF, Lynch) y otros son «familiares», con agregación sin mutación conocida. Las cifras de la clase (95 % más 6 %) suman más de 100: quédate con la idea.',
           '<b>Cribado poblacional</b> en España: <b>test inmunológico de sangre oculta en heces cada 2 años, de los 50 a los 69</b>; si es positivo, colonoscopia.',
           'Los grupos de alto riesgo (PAF, Lynch, familiares de primer grado, enfermedad inflamatoria intestinal de larga evolución) no entran en el cribado poblacional, sino en vigilancia con <b>colonoscopia</b>.',
@@ -750,7 +750,7 @@ export const TUMORES_DELGADO_COLORRECTAL = [
       {
         titulo: 'Pólipos y pólipo maligno',
         puntos: [
-          '<b>Hiperplásicos</b>: los más frecuentes, diminutos y planos. Algunos desarrollan cambios adenomatosos (<b>pólipo serrado</b>), que es premaligno y se asocia a MSI.',
+          '<b>Hiperplásicos</b>: los más frecuentes, diminutos y sin riesgo. Otro pólipo de aspecto serrado, la <b>lesión serrada sésil</b> del colon derecho, sí es premaligno y se asocia a MSI.',
           '<b>Adenomas</b>: tubular (65-80 %, suele ser pediculado y con poca atipia), tubulovelloso (10-25 %) y <b>velloso</b> (5-10 %, con atipia grave a menudo).',
           'El riesgo de cáncer crece con el <b>tamaño</b> y con el <b>componente velloso</b>: es bajo en el tubular de menos de 1 cm y máximo en el velloso de más de 2 cm (la clase da 50 % o más).',
           'Los pediculados se extirpan con un <b>asa que corta y coagula</b>; los sésiles se elevan antes con suero inyectado en la submucosa, con más riesgo.',
@@ -1258,7 +1258,7 @@ export const TUMORES_DELGADO_COLORRECTAL = [
       {
         titulo: 'Epidemiología y factores de riesgo',
         puntos: [
-          'Tumor <b>poco frecuente</b> y en aumento por el <b>VPH</b>; aparece sobre todo en la séptima década y con igual reparto entre sexos.',
+          'Tumor <b>poco frecuente</b> y en aumento por el <b>VPH</b>; aparece sobre todo a partir de los 60 años y algo más en mujeres.',
           'Los VPH más frecuentes en la región anal son el <b>6 y el 11</b>, pero son de <b>bajo riesgo</b> (condilomas). Los <b>oncogénicos</b> son el <b>16 y el 18</b>, además del 31, 33 y 35.',
           'Progresa desde la <b>displasia de alto grado</b> (lesión intraepitelial) hasta el cáncer invasivo, lo que permite el diagnóstico precoz.',
           'Se hace <b>cribado en varones VIH positivos que tienen sexo con hombres</b>, el grupo de mayor riesgo; la inmunosupresión favorece la progresión.',
@@ -1367,7 +1367,7 @@ export const TUMORES_DELGADO_COLORRECTAL = [
         puntos: [
           '<b>Enfermedad de Paget</b> perianal: adenocarcinoma intraepitelial. <b>Enfermedad de Bowen</b>: carcinoma epidermoide in situ.',
           'Ambas dan una lesión perianal <b>pruriginosa, eritematosa y eccematosa</b>, de bordes mal definidos y a veces pigmentada, que se confunde con un eccema.',
-          'Crecen despacio: menos del 10 % evolucionan a cáncer invasivo, más en inmunodeprimidos.',
+          'Crecen despacio. El Bowen pocas veces evoluciona a cáncer invasivo, más en inmunodeprimidos; el Paget puede asociarse a un adenocarcinoma subyacente, que hay que buscar.',
           'Tratamiento: resección, fulguración, terapia fotodinámica, láser, 5-FU tópico o imiquimod.',
         ],
       },
