@@ -17,15 +17,22 @@ export const BLOQUES = [
     lamina: [
       { dibujo: { tipo: 'tiempo' } },
       '<b>1932.</b> Cuthbert Dukes, patólogo en Londres, clasifica el cáncer de recto en A, B y C según lo profundo que llega y si hay ganglios. Es la idea de fondo de todo lo que viene después: el pronóstico depende de cuánto se ha extendido el tumor.',
+      { dibujo: { tipo: 'dukes' } },
       '<b>1943–1952.</b> Pierre Denoix, cirujano del Institut Gustave-Roussy de París, propone describir cualquier tumor con tres letras: <b>T</b> (tumor primario), <b>N</b> (ganglios, <i>nodes</i>) y <b>M</b> (metástasis).',
+      { dibujo: { tipo: 'triada' } },
       '<b>Años 50 y 60.</b> La Unión Internacional Contra el Cáncer (UICC, Ginebra) adopta el sistema y en 1968 publica el primer librito de bolsillo. En 1959 nace en Estados Unidos el comité que hoy se llama AJCC, que publica su primer manual en 1977.',
+      { dibujo: { tipo: 'editores' } },
       '<b>1987.</b> UICC y AJCC unifican las definiciones. Desde entonces hay un solo TNM con dos editores.',
+      { dibujo: { tipo: 'comparar', columnas: ['', 'UICC', 'AJCC'], filas: [['Sede', 'Ginebra', 'Chicago (EE. UU.)'], ['Primer libro', '1968', '1977'], ['Edición vigente', '9.ª (2025)', '8.ª (2017)']], pie: 'Dos editores, un solo sistema.' } },
       '<b>Hoy.</b> AJCC 8.ª edición (2017, en vigor desde 2018) y UICC 9.ª (2025, en vigor desde enero de 2026). Para estómago y colon las dos dicen lo mismo, y es lo que usaremos.',
+      { dibujo: { tipo: 'ediciones' } },
       '<b>Lo que viene.</b> El 16 de noviembre de 2026 se publicó la revisión de colon y recto (UICC-9.1, para 2027): los depósitos tumorales pasan a ser un descriptor propio y la metástasis peritoneal se divide en M1c1 y M1c2. Todavía no está en vigor.',
+      { dibujo: { tipo: 'comparar', columnas: ['', 'Hoy', '2027'], filas: [['Depósitos tumorales', 'N1c si no hay ganglios', 'Descriptor propio'], ['Peritoneo', 'M1c', 'M1c1 solo peritoneo; M1c2 con otros órganos'], ['Estadios', 'Los de la tabla actual', 'Cambian los grupos']] } },
     ],
     preguntas: [
       {
         id: 'h1',
+        dibujo: { tipo: 'triada' },
         enunciado: '¿Quién propuso describir los tumores con las letras T, N y M?',
         opciones: ['Cuthbert Dukes', 'Pierre Denoix', 'William Halsted', 'Rudolf Virchow'],
         correcta: 1,
@@ -60,6 +67,7 @@ export const BLOQUES = [
       },
       {
         id: 'h4',
+        dibujo: { tipo: 'ediciones' },
         enunciado: 'Hoy, para estadificar un cáncer gástrico o de colon, ¿qué edición usamos?',
         opciones: [
           'AJCC 7.ª, porque es la que viene en los libros',
@@ -81,11 +89,16 @@ export const BLOQUES = [
     minutos: 12,
     lamina: [
       '<b>T: el tumor primario.</b> En el estómago y el colon, que son tubos, la T no es el tamaño sino <b>hasta qué capa de la pared llega</b>. Un tumor de 6 cm puede ser T1 y uno de 2 cm puede ser T4.',
-      { dibujo: { tipo: 'pared', organo: 'estomago', pie: 'Cada columna es un tumor distinto. La T dice hasta qué capa llega, no cuánto mide.' } },
+      { dibujo: { tipo: 'tamano' } },
+      { aparte: true, dibujo: { tipo: 'pared', organo: 'estomago', pie: 'Cada columna es un tumor distinto. La T dice hasta qué capa llega, no cuánto mide.' } },
       '<b>N: los ganglios regionales.</b> En estos dos órganos se cuenta <b>cuántos ganglios tienen tumor</b>. Un ganglio metastásico fuera del territorio regional no es N, es M.',
+      { dibujo: { tipo: 'territorio' } },
       '<b>M: metástasis a distancia.</b> M0 o M1. Incluye hígado, pulmón, peritoneo y ganglios no regionales.',
+      { dibujo: { tipo: 'metastasis', organo: 'estomago', sitios: ['higado', 'pulmon', 'peritoneo', 'paraaortico'], pie: 'Hígado, pulmón, peritoneo o ganglios lejanos: todo es M.' } },
       '<b>X</b> significa «no se puede valorar» (NX). <b>En caso de duda entre dos categorías, se elige la menos avanzada.</b>',
+      { dibujo: { tipo: 'duda' } },
       '<b>Del TNM al estadio.</b> Las combinaciones de T, N y M con pronóstico parecido se agrupan en estadios 0, I, II, III y IV. El TNM describe; el estadio resume.',
+      { dibujo: { tipo: 'escalera' } },
       '<b>Prefijos.</b> <b>c</b> = clínico, antes de tratar (exploración, endoscopia, imagen, laparoscopia). <b>p</b> = patológico, con la pieza quirúrgica. <b>yp</b> = patológico después de un tratamiento previo (quimio o radioterapia). <b>r</b> = recidiva. El estadio clínico <b>no se corrige</b> después: se añade el patológico.',
       { dibujo: { tipo: 'recorrido' } },
       '<b>Clasificación R</b> (lo que queda tras la cirugía): R0 sin tumor residual, R1 tumor microscópico en el margen, R2 tumor residual visible.',
@@ -116,6 +129,7 @@ export const BLOQUES = [
       },
       {
         id: 'l3',
+        dibujo: { tipo: 'duda' },
         enunciado:
           'En el TAC no está claro si el tumor llega a la subserosa (T3) o se queda en la muscular propia (T2). ¿Qué T se asigna?',
         opciones: ['T3, por precaución', 'T2', 'TX', 'Se espera a la cirugía para asignar la T'],
@@ -125,6 +139,7 @@ export const BLOQUES = [
       },
       {
         id: 'l4',
+        dibujo: { tipo: 'residuo' },
         enunciado: 'Tras la cirugía, el informe dice «margen afecto al microscopio». ¿Qué clasificación R es?',
         opciones: ['R0', 'R1', 'R2', 'RX'],
         correcta: 1,
@@ -133,6 +148,7 @@ export const BLOQUES = [
       },
       {
         id: 'l5',
+        dibujo: { tipo: 'territorio' },
         enunciado:
           'Un cáncer gástrico tiene una adenopatía metastásica junto a la aorta (para-aórtica), fuera del territorio regional. ¿Cómo se clasifica?',
         opciones: ['N3b', 'N1', 'M1', 'No se tiene en cuenta'],
@@ -150,7 +166,9 @@ export const BLOQUES = [
     minutos: 8,
     lamina: [
       '<b>La pared, de dentro a fuera:</b> mucosa (epitelio, lámina propia, <i>muscularis mucosae</i>), submucosa, muscular propia, subserosa y serosa (peritoneo visceral).',
+      { dibujo: { tipo: 'pared', organo: 'estomago', pie: 'De la luz hacia fuera. Cada columna es una T.' } },
       '<b>T.</b> Tis: displasia de alto grado, sin invadir la lámina propia. T1a: lámina propia o <i>muscularis mucosae</i>. T1b: submucosa. T2: muscular propia. T3: subserosa. T4a: atraviesa la serosa. T4b: invade órganos vecinos (páncreas, colon, bazo…).',
+      { dibujo: { tipo: 'escala', niveles: [{ codigo: 'Tis', texto: 'Epitelio, sin invadir la lámina propia' }, { codigo: 'T1a', texto: 'Lámina propia o muscularis mucosae' }, { codigo: 'T1b', texto: 'Submucosa' }, { codigo: 'T2', texto: 'Muscular propia' }, { codigo: 'T3', texto: 'Subserosa' }, { codigo: 'T4a', texto: 'Atraviesa la serosa' }, { codigo: 'T4b', texto: 'Órganos vecinos' }] } },
       '<b>N</b>, por número de ganglios positivos: N1 = 1–2, N2 = 3–6, N3a = 7–15, N3b = 16 o más. El patólogo debe examinar <b>al menos 16 ganglios</b>.',
       { dibujo: { tipo: 'ganglios', organo: 'estomago' } },
       '<b>M1:</b> metástasis a distancia, incluida la <b>citología peritoneal positiva</b> y los ganglios no regionales (para-aórticos, por ejemplo).',
@@ -158,11 +176,14 @@ export const BLOQUES = [
       '<b>Unión esofagogástrica.</b> Si el tumor afecta a la unión y su centro está a 2 cm o menos de ella, se estadifica como esófago. Si el centro está a más de 2 cm, como estómago.',
       { dibujo: { tipo: 'union' } },
       '<b>Cómo se estadifica antes de operar:</b> endoscopia con biopsia, ecoendoscopia (T y N en tumores precoces), TAC de tórax, abdomen y pelvis (N y M) y laparoscopia de estadificación con lavado peritoneal (M peritoneal).',
+      { dibujo: { tipo: 'pruebas', organo: 'estomago' } },
       '<b>Dos tablas de estadios.</b> Desde la 8.ª edición, el estadio clínico (cTNM) y el patológico (pTNM) tienen tablas distintas: antes de operar no se pueden contar los ganglios, solo decir si parecen afectados o no.',
+      { dibujo: { tipo: 'dosTablas' } },
     ],
     preguntas: [
       {
         id: 'e1',
+        dibujo: { tipo: 'pared', organo: 'estomago', resaltar: 'T3' },
         enunciado: 'Un adenocarcinoma gástrico llega a la subserosa, sin perforar la serosa. ¿Qué T es?',
         opciones: ['T2', 'T3', 'T4a', 'T4b'],
         correcta: 1,
@@ -171,6 +192,7 @@ export const BLOQUES = [
       },
       {
         id: 'e2',
+        dibujo: { tipo: 'ganglios', organo: 'estomago', positivos: 8, total: 20 },
         enunciado: 'En la pieza de gastrectomía hay 8 ganglios con metástasis. ¿Qué N es?',
         opciones: ['N1', 'N2', 'N3a', 'N3b'],
         correcta: 2,
@@ -186,6 +208,7 @@ export const BLOQUES = [
       },
       {
         id: 'e4',
+        dibujo: { tipo: 'pruebas', organo: 'estomago', resaltar: 3 },
         enunciado: '¿Qué prueba detecta mejor la diseminación peritoneal pequeña en el cáncer gástrico?',
         opciones: ['TAC', 'Ecoendoscopia', 'PET-TAC', 'Laparoscopia con lavado peritoneal'],
         correcta: 3,
@@ -201,19 +224,23 @@ export const BLOQUES = [
     titulo: 'Cáncer de colon: las reglas',
     minutos: 8,
     lamina: [
-      '<b>T.</b> Tis: carcinoma intramucoso (lámina propia o <i>muscularis mucosae</i>). T1: submucosa. T2: muscular propia. T3: atraviesa la muscular propia hasta la grasa pericólica. T4a: perfora el peritoneo visceral. T4b: invade o está adherido a otros órganos.',
+      '<b>T.</b> Tis: carcinoma intramucoso: invade la lámina propia, sin atravesar la <i>muscularis mucosae</i>. T1: submucosa. T2: muscular propia. T3: atraviesa la muscular propia hasta la grasa pericólica. T4a: perfora el peritoneo visceral. T4b: invade o está adherido a otros órganos.',
+      { dibujo: { tipo: 'escala', niveles: [{ codigo: 'Tis', texto: 'Intramucoso: lámina propia, sin pasar la muscularis mucosae' }, { codigo: 'T1', texto: 'Submucosa' }, { codigo: 'T2', texto: 'Muscular propia' }, { codigo: 'T3', texto: 'Grasa pericólica' }, { codigo: 'T4a', texto: 'Perfora el peritoneo visceral' }, { codigo: 'T4b', texto: 'Invade otros órganos' }] } },
       '<b>Una trampa.</b> Un carcinoma que invade la lámina propia es <b>Tis en el colon</b> pero <b>T1a en el estómago</b>. En la mucosa del colon casi no hay linfáticos, así que ese tumor prácticamente no da metástasis.',
-      { dibujo: { tipo: 'pared', organo: 'colon', resaltar: 'Tis', pie: 'En el colon, lo que no sale de la mucosa es Tis. En el estómago, eso mismo sería T1a.' } },
+      { dibujo: { tipo: 'pared', organo: 'colon', resaltar: 'Tis', pie: 'En el colon, invadir la lámina propia sin atravesar la muscularis mucosae es Tis. En el estómago, eso mismo sería T1a.' } },
       '<b>N.</b> N1a: 1 ganglio. N1b: 2–3. N1c: <b>ningún ganglio positivo, pero sí depósitos tumorales</b> (nódulos de tumor en la grasa, sin estructura de ganglio). N2a: 4–6. N2b: 7 o más. Hay que examinar <b>al menos 12 ganglios</b>.',
       { dibujo: { tipo: 'ganglios', organo: 'colon' } },
       '<b>M.</b> M1a: un órgano, sin peritoneo. M1b: dos o más órganos, sin peritoneo. M1c: peritoneo, con o sin otros órganos.',
       { dibujo: { tipo: 'metastasis', organo: 'colon', sitios: ['higado', 'pulmon'], pie: 'Hígado y pulmón, sin peritoneo: dos órganos, M1b.' } },
       '<b>Cómo se estadifica:</b> colonoscopia completa con biopsia (y estudio de MMR/MSI), CEA, analítica y TAC de tórax, abdomen y pelvis.',
+      { dibujo: { tipo: 'pruebas', organo: 'colon' } },
       '<b>En 2027</b> (todavía no): los depósitos tumorales serán un descriptor propio, M1c se dividirá en M1c1 (solo peritoneo) y M1c2 (peritoneo y otros órganos), y cambiarán los grupos de estadio.',
+      { dibujo: { tipo: 'metastasis', organo: 'colon', sitios: ['peritoneo'], pie: 'Hoy, cualquier peritoneo es M1c. En 2027 será M1c1 si solo hay peritoneo.' } },
     ],
     preguntas: [
       {
         id: 'k1',
+        dibujo: { tipo: 'pared', organo: 'colon', resaltar: 'Tis' },
         enunciado: 'Un carcinoma invade la lámina propia sin llegar a la submucosa. ¿Cómo se clasifica?',
         opciones: [
           'T1 en el colon y T1 en el estómago',
@@ -223,10 +250,11 @@ export const BLOQUES = [
         ],
         correcta: 1,
         explicacion:
-          'Es la diferencia más traicionera entre los dos órganos. En el colon, todo lo que no pasa de la mucosa es Tis (intramucoso), porque casi no da metástasis ganglionares. En el estómago, la invasión de la lámina propia ya es T1a, y un T1a gástrico tiene un riesgo pequeño pero real de afectar a los ganglios.',
+          'Es la diferencia más traicionera entre los dos órganos. En el colon, el carcinoma que invade la lámina propia sin atravesar la muscularis mucosae es Tis (intramucoso), porque casi no da metástasis ganglionares. En el estómago, la invasión de la lámina propia ya es T1a, y un T1a gástrico tiene un riesgo pequeño pero real de afectar a los ganglios.',
       },
       {
         id: 'k2',
+        dibujo: { tipo: 'ganglios', organo: 'colon', positivos: 5, total: 20 },
         enunciado: 'En una hemicolectomía hay 5 ganglios positivos de 20 examinados. ¿Qué N es?',
         opciones: ['N1b', 'N2a', 'N2b', 'N3'],
         correcta: 1,
@@ -234,6 +262,7 @@ export const BLOQUES = [
       },
       {
         id: 'k3',
+        dibujo: { tipo: 'metastasis', organo: 'colon', sitios: ['higado', 'pulmon'] },
         enunciado: 'Un cáncer de colon tiene metástasis en el hígado y en el pulmón, sin afectar al peritoneo. ¿Qué M es?',
         opciones: ['M1', 'M1a', 'M1b', 'M1c'],
         correcta: 2,
@@ -292,6 +321,7 @@ export const CASOS = [
       {
         pregunta: {
           id: 'c1c',
+          dibujo: { tipo: 'diseccion' },
           enunciado: '¿Qué tratamiento le corresponde?',
           opciones: [
             'Resección endoscópica',
@@ -318,6 +348,7 @@ export const CASOS = [
         texto:
           'Varón de 58 años que ha perdido 6 kg en dos meses y tiene una anemia ferropénica. En la endoscopia hay una masa ulcerada de 5 cm entre el antro y el cuerpo, y la biopsia es de adenocarcinoma. En el TAC, el tumor atraviesa la pared y afecta a la grasa que rodea el estómago, sin invadir órganos vecinos, y hay tres ganglios perigástricos de 12 mm. No se ven metástasis.',
       },
+      { dibujo: { tipo: 'mapa', resaltar: ['estomago'], pie: 'Entre el antro y el cuerpo.' } },
       {
         pregunta: {
           id: 'c2a',
@@ -334,6 +365,7 @@ export const CASOS = [
         },
       },
       { texto: 'Laparoscopia: no hay implantes y la citología del lavado es negativa.' },
+      { dibujo: { tipo: 'metastasis', organo: 'estomago', sitios: [], pie: 'Laparoscopia limpia y citología negativa.' } },
       {
         pregunta: {
           id: 'c2b',
@@ -348,6 +380,7 @@ export const CASOS = [
       {
         pregunta: {
           id: 'c2c',
+          dibujo: { tipo: 'perioperatorio' },
           enunciado: '¿Qué tratamiento le corresponde?',
           opciones: [
             'Gastrectomía directamente',
@@ -390,6 +423,7 @@ export const CASOS = [
         texto:
           'Mujer de 45 años con saciedad precoz. La endoscopia muestra un estómago rígido, que se distiende poco, y la biopsia es de un adenocarcinoma difuso con células en anillo de sello. En el TAC la pared gástrica está engrosada, sin metástasis visibles y sin ascitis.',
       },
+      { dibujo: { tipo: 'mapa', resaltar: ['estomago', 'peritoneo'], pie: 'El difuso infiltra toda la pared y tiende a sembrar el peritoneo.' } },
       {
         texto:
           'Laparoscopia de estadificación: no se ve ningún implante. En la citología del lavado peritoneal hay células malignas.',
@@ -418,6 +452,7 @@ export const CASOS = [
       {
         pregunta: {
           id: 'c3c',
+          dibujo: { tipo: 'pruebas', organo: 'estomago', resaltar: 3 },
           enunciado: 'Si no se hubiera hecho la laparoscopia, ¿qué habría pasado?',
           opciones: [
             'Nada: el resultado habría sido el mismo',
@@ -464,6 +499,7 @@ export const CASOS = [
       {
         pregunta: {
           id: 'c4b',
+          dibujo: { tipo: 'ganglios', organo: 'estomago' },
           enunciado: '¿Son suficientes 31 ganglios?',
           opciones: ['No, hacen falta 40', 'Sí, el mínimo es 16', 'No, el mínimo es 35', 'Da igual: solo cuentan los positivos'],
           correcta: 1,
@@ -474,6 +510,7 @@ export const CASOS = [
       {
         pregunta: {
           id: 'c4c',
+          dibujo: { tipo: 'residuo' },
           enunciado: 'Márgenes libres y sin tumor residual. ¿Qué R es?',
           opciones: ['R0', 'R1', 'R2', 'pR0'],
           correcta: 0,
@@ -506,12 +543,13 @@ export const CASOS = [
           opciones: ['Tis', 'T1', 'T2', 'No se puede saber en un pólipo'],
           correcta: 1,
           explicacion:
-            'Llega a la submucosa: T1. Si se quedara en la mucosa sería Tis (intramucoso) y si alcanzara la muscular propia, T2. La T sí se puede asignar en un pólipo resecado entero.',
+            'Llega a la submucosa: T1. Si se quedara en la lámina propia sin atravesar la muscularis mucosae sería Tis (intramucoso) y si alcanzara la muscular propia, T2. La T sí se puede asignar en un pólipo resecado entero.',
         },
       },
       {
         pregunta: {
           id: 'c5b',
+          dibujo: { tipo: 'algoritmo', pasos: [{ texto: 'Pólipo con cáncer: pT1', detalle: 'resecado entero por colonoscopia' }, { texto: '¿Algún factor de riesgo?', detalle: 'invasión linfovascular, margen < 1 mm, poco diferenciado' }], ramas: [{ si: 'No', texto: 'Vigilancia' }, { si: 'Sí', texto: 'Colectomía con ganglios' }] },
           enunciado: 'Tiene invasión linfovascular y un margen de menos de 1 mm. ¿Qué se hace?',
           opciones: [
             'Nada más: el pólipo está quitado',
@@ -579,6 +617,7 @@ export const CASOS = [
       {
         pregunta: {
           id: 'c6c',
+          dibujo: { tipo: 'algoritmo', pasos: [{ texto: 'Estadio II de colon' }, { texto: '¿Algún factor de alto riesgo?', detalle: 'T4, menos de 12 ganglios, obstrucción o perforación, invasión linfovascular o perineural, poco diferenciado' }], ramas: [{ si: 'No', texto: 'Seguimiento' }, { si: 'Sí', texto: 'Valorar adyuvancia', detalle: 'antes, mirar MSI' }] },
           enunciado: '¿Cuál de estos NO es un factor de alto riesgo en el estadio II de colon?',
           opciones: [
             'T4',
@@ -641,6 +680,7 @@ export const CASOS = [
       {
         pregunta: {
           id: 'c7d',
+          dibujo: { tipo: 'comparar', columnas: ['', 'Sin depósitos', 'Con 2 depósitos'], filas: [['N', 'N0', 'N1c'], ['Estadio', 'IIA', 'IIIB'], ['Quimioterapia adyuvante', 'Solo si hay factores de riesgo', 'Sí']] },
           enunciado: '¿Qué cambia para el paciente del caso con su pT3 N1c?',
           opciones: [
             'Nada, porque no tiene ganglios',
@@ -691,6 +731,7 @@ export const CASOS = [
       {
         pregunta: {
           id: 'c8c',
+          dibujo: { tipo: 'comparar', columnas: ['', 'Para qué sirve'], filas: [['RAS (KRAS, NRAS)', 'Si está mutado, los anti-EGFR no funcionan'], ['BRAF V600E', 'Tiene tratamiento propio'], ['MMR / MSI', 'Si es MSI-H, inmunoterapia'], ['HER2', 'Si está amplificado, tratamiento propio']] },
           enunciado: 'Antes de decidir el tratamiento sistémico, ¿qué hay que pedir al patólogo?',
           opciones: [
             'Solo la confirmación de adenocarcinoma',
@@ -749,7 +790,7 @@ export const CHULETA = {
   },
   colon: {
     T: [
-      ['Tis', 'Intramucoso: lámina propia o muscularis mucosae'],
+      ['Tis', 'Intramucoso: invade la lámina propia, sin atravesar la muscularis mucosae'],
       ['T1', 'Submucosa'],
       ['T2', 'Muscular propia'],
       ['T3', 'Grasa pericólica'],

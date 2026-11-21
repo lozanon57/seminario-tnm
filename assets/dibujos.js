@@ -5,32 +5,52 @@
  * de ancho para que la letra se lea en un móvil.
  */
 import { nEstomago, nColon } from './estadios.js'
-
-const esc = (t) => String(t ?? '').replace(/[&<>"]/g, (c) => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;' })[c])
-
-function figura(ancho, alto, cuerpo, descripcion, pie) {
-  return `<figure class="dibujo"><svg viewBox="0 0 ${ancho} ${alto}" role="img" aria-label="${esc(descripcion)}">${cuerpo}</svg>${
-    pie ? `<figcaption>${esc(pie)}</figcaption>` : ''
-  }</figure>`
-}
-
-const texto = (x, y, t, clase = 'd-texto', ancla = 'start') =>
-  `<text x="${x}" y="${y}" class="${clase}" text-anchor="${ancla}">${esc(t)}</text>`
+import { esc, figura, texto } from './dibujos-base.js'
+import { dibujoEsquema } from './dibujos-esquemas.js'
+import { dibujoSeminario } from './dibujos-seminario.js'
 
 /* ------------------------------------------------------------------ */
 /* La pared del tubo digestivo y hasta dónde llega cada T              */
 /* ------------------------------------------------------------------ */
 
+const MUCOSA = [
+  { id: 'epi', nombre: 'Epitelio', alto: 10, clase: 'c-mucosa' },
+  { id: 'lp', nombre: 'Lámina propia', alto: 22, clase: 'c-mucosa' },
+]
+const HUECO = { id: 'hueco', nombre: '', alto: 12, clase: '' }
+
 function capas(organo) {
-  return [
-    { id: 'epi', nombre: 'Epitelio', alto: 10, clase: 'c-mucosa' },
-    { id: 'lp', nombre: 'Lámina propia', alto: 22, clase: 'c-mucosa' },
+  if (organo === 'vesicula') {
+    return [
+      ...MUCOSA,
+      { id: 'mus', nombre: 'Capa muscular', alto: 36, clase: 'c-mp' },
+      { id: 'pm', nombre: 'Tejido perimuscular', alto: 34, clase: 'c-ss' },
+      { id: 'serosa', nombre: 'Serosa o lecho', alto: 7, clase: 'c-serosa' },
+      HUECO,
+      { id: 'vecino', nombre: 'Hígado u órgano', alto: 30, clase: 'c-vecino' },
+    ]
+  }
+  const pared = [
+    ...MUCOSA,
     { id: 'mm', nombre: 'Muscularis mucosae', alto: 9, clase: 'c-mm' },
     { id: 'sm', nombre: 'Submucosa', alto: 36, clase: 'c-sm' },
     { id: 'mp', nombre: 'Muscular propia', alto: 44, clase: 'c-mp' },
-    { id: 'ss', nombre: organo === 'colon' ? 'Grasa pericólica' : 'Subserosa', alto: 30, clase: 'c-ss' },
+  ]
+  if (organo === 'esofago') {
+    return [
+      ...pared,
+      { id: 'ss', nombre: 'Adventicia', alto: 34, clase: 'c-ss' },
+      HUECO,
+      { id: 'vecino', nombre: 'Pleura, pericardio', alto: 24, clase: 'c-vecino' },
+      { id: 'vecino2', nombre: 'Aorta, tráquea', alto: 24, clase: 'c-vecino-2' },
+    ]
+  }
+  const externa = { colon: 'Grasa pericólica', delgado: 'Subserosa' }[organo] ?? 'Subserosa'
+  return [
+    ...pared,
+    { id: 'ss', nombre: externa, alto: 30, clase: 'c-ss' },
     { id: 'serosa', nombre: 'Serosa', alto: 7, clase: 'c-serosa' },
-    { id: 'hueco', nombre: '', alto: 12, clase: '' },
+    HUECO,
     { id: 'vecino', nombre: 'Órgano vecino', alto: 30, clase: 'c-vecino' },
   ]
 }
@@ -38,15 +58,22 @@ function capas(organo) {
 /** Profundidad de cada T: [capa, fracción de esa capa que alcanza]. */
 const PROFUNDIDAD = {
   estomago: { Tis: ['epi', 1], T1a: ['mm', 0.8], T1b: ['sm', 0.55], T2: ['mp', 0.55], T3: ['ss', 0.6], T4a: ['hueco', 0.6], T4b: ['vecino', 0.55] },
-  colon: { Tis: ['mm', 0.8], T1: ['sm', 0.55], T2: ['mp', 0.55], T3: ['ss', 0.6], T4a: ['hueco', 0.6], T4b: ['vecino', 0.55] },
+  colon: { Tis: ['lp', 0.8], T1: ['sm', 0.55], T2: ['mp', 0.55], T3: ['ss', 0.6], T4a: ['hueco', 0.6], T4b: ['vecino', 0.55] },
+  delgado: { Tis: ['epi', 1], T1a: ['lp', 0.8], T1b: ['sm', 0.55], T2: ['mp', 0.55], T3: ['ss', 0.6], T4: ['vecino', 0.45] },
+  esofago: { Tis: ['epi', 1], T1a: ['mm', 0.8], T1b: ['sm', 0.55], T2: ['mp', 0.55], T3: ['ss', 0.6], T4a: ['vecino', 0.6], T4b: ['vecino2', 0.6] },
+  vesicula: { Tis: ['epi', 1], T1a: ['lp', 0.8], T1b: ['mus', 0.55], T2: ['pm', 0.6], T3: ['vecino', 0.5] },
 }
 
+const NOMBRE_PARED = { estomago: 'estómago', colon: 'colon', delgado: 'intestino delgado', esofago: 'esófago', vesicula: 'vesícula' }
+
 /**
- * @param {'estomago'|'colon'} organo
+* @param {'estomago'|'colon'|'delgado'|'esofago'|'vesicula'} organo
  * @param {{ resaltar?: string, pie?: string }} [opciones]
  */
-export function pared(organo, { resaltar, pie } = {}) {
+export function pared(organo, { resaltar: pedido, pie } = {}) {
   const lista = capas(organo)
+  const claves = Object.keys(PROFUNDIDAD[organo])
+  const resaltar = claves.includes(pedido) ? pedido : claves.find((k) => pedido?.startsWith(k))
   const y0 = 46
   let y = y0
   const pos = {}
@@ -79,7 +106,7 @@ export function pared(organo, { resaltar, pie } = {}) {
     })
     .join('')
   const alto = y + 8
-  const descripcion = `Corte de la pared del ${organo === 'colon' ? 'colon' : 'estómago'} con la profundidad que alcanza cada categoría T`
+  const descripcion = `Corte de la pared de ${NOMBRE_PARED[organo]} con la profundidad que alcanza cada categoría T`
   return figura(
     420,
     alto,
@@ -290,26 +317,56 @@ export function residuo() {
 /* Unión esofagogástrica: la regla de los 2 cm                          */
 /* ------------------------------------------------------------------ */
 
-export function union({ pie } = {}) {
-  const contorno =
-    'M70,0 V96 C40,140 40,230 110,270 C170,300 245,270 250,205 C256,140 215,98 150,92 C128,90 112,94 104,96 V0'
+/** Contorno del estómago visto de frente: fundus a la derecha, píloro a la izquierda. */
+export const ESTOMAGO =
+  'M150,120 C146,150 136,175 120,195 C104,215 86,232 70,240 L56,246 L60,282 C110,300 180,326 240,312 C300,298 330,240 326,180 C322,120 290,82 246,80 C214,79 196,96 190,120 Z'
+/** El esófago, un tubo estrecho que acaba en la unión. */
+export const ESOFAGO = 'M150,0 H190 V120 H150 Z'
+const ESTRIAS = [158, 166, 174, 182].map((x) => `<line x1="${x}" y1="6" x2="${x}" y2="114" class="d-estria"/>`).join('')
+
+const TUMORES_UNION = [
+  { n: 1, cx: 170, cy: 133, rx: 15, ry: 22, cond: 'Afecta a la unión y su centro está a 2 cm o menos', res: 'Se estadifica como esófago', clase: 'd-minio' },
+  { n: 2, cx: 220, cy: 142, rx: 14, ry: 13, cond: 'Centro a 2 cm o menos, pero no toca la unión', res: 'Se estadifica como estómago', clase: 'd-primario' },
+  { n: 3, cx: 232, cy: 236, rx: 16, ry: 15, cond: 'Centro a más de 2 cm, toque o no la unión', res: 'Se estadifica como estómago', clase: 'd-primario' },
+]
+
+/**
+ * @param {{ resaltar?: number, pie?: string }} [opciones] resaltar: 1, 2 o 3
+ */
+export function union({ resaltar, pie } = {}) {
+  const tumores = TUMORES_UNION.map((t) => {
+    const tenue = resaltar && resaltar !== t.n ? ' tenue' : ''
+    return `<g class="columna${tenue}"><ellipse cx="${t.cx}" cy="${t.cy}" rx="${t.rx}" ry="${t.ry}" class="d-tumor"/>
+      ${texto(t.cx, t.cy + 5, String(t.n), 'd-rotulo d-sobre-minio', 'middle')}</g>`
+  }).join('')
+  const leyenda = TUMORES_UNION.map((t, i) => {
+    const y = 352 + i * 44
+    const tenue = resaltar && resaltar !== t.n ? ' tenue' : ''
+    return `<g class="columna${tenue}"><circle cx="22" cy="${y - 4}" r="11" class="d-tumor"/>${texto(22, y + 1, String(t.n), 'd-rotulo d-sobre-minio', 'middle')}
+      ${texto(42, y - 2, t.cond, 'd-texto')}${texto(42, y + 16, '→ ' + t.res, `d-texto d-negrita ${t.clase}`)}</g>`
+  }).join('')
   const cuerpo = `
-    <defs><clipPath id="recorte-union"><path d="${contorno}"/></clipPath></defs>
-    <path d="${contorno}" class="d-organo"/>
-    <rect x="30" y="96" width="240" height="50" class="d-franja" clip-path="url(#recorte-union)"/>
-    <line x1="30" y1="96" x2="262" y2="96" class="d-corte"/>
-    <path d="M262,96 h6 v50 h-6" class="d-flecha"/>
-    ${texto(276, 100, 'Unión esofagogástrica', 'd-texto d-peq')}
-    ${texto(276, 126, '2 cm', 'd-rotulo')}
-    <circle cx="88" cy="110" r="13" class="d-tumor"/>
-    <line x1="101" y1="112" x2="270" y2="164" class="d-guia"/>
-    ${texto(276, 162, 'Centro a ≤ 2 cm', 'd-texto d-peq')}${texto(276, 177, 'y afecta a la unión', 'd-texto d-peq')}${texto(276, 194, '→ esófago', 'd-texto d-negrita d-minio')}
-    <circle cx="150" cy="205" r="13" class="d-tumor"/>
-    <line x1="164" y1="207" x2="270" y2="228" class="d-guia"/>
-    ${texto(276, 226, 'Centro a más de 2 cm', 'd-texto d-peq')}${texto(276, 243, '→ estómago', 'd-texto d-negrita d-minio')}
-    ${texto(112, 30, 'Esófago', 'd-texto d-peq d-tenue')}
-    ${texto(122, 255, 'Estómago', 'd-texto d-peq d-tenue', 'middle')}`
-  return figura(420, 290, cuerpo, 'Regla de los 2 cm de la unión esofagogástrica: centro a 2 cm o menos y afecta a la unión, esófago; a más de 2 cm, estómago', pie)
+    <defs><clipPath id="recorte-estomago"><path d="${ESTOMAGO}"/></clipPath></defs>
+    <path d="${ESTOMAGO}" class="d-estomago"/>
+    <circle cx="170" cy="120" r="56" class="d-franja" clip-path="url(#recorte-estomago)"/>
+    <circle cx="170" cy="120" r="56" class="d-radio" clip-path="url(#recorte-estomago)"/>
+    <path d="${ESOFAGO}" class="d-esofago"/>${ESTRIAS}
+    <line x1="140" y1="120" x2="200" y2="120" class="d-corte"/>
+    <path d="M126,120 h-8 v56 h8" class="d-flecha"/>
+    ${texto(112, 153, '2 cm', 'd-rotulo', 'end')}
+    ${texto(138, 112, 'Unión esofagogástrica', 'd-texto d-peq', 'end')}
+    ${texto(200, 40, 'Esófago', 'd-texto d-negrita')}${texto(200, 56, 'tubo estrecho, sin serosa', 'd-texto d-peq d-tenue')}
+    ${texto(150, 288, 'Estómago', 'd-texto d-negrita', 'middle')}
+    <line x1="330" y1="124" x2="226" y2="112" class="d-guia"/>
+    ${texto(334, 120, 'Zona de 2 cm', 'd-texto d-peq d-minio')}${texto(334, 135, 'alrededor', 'd-texto d-peq d-minio')}${texto(334, 150, 'de la unión', 'd-texto d-peq d-minio')}
+    ${tumores}${leyenda}`
+  return figura(
+    420,
+    450,
+    cuerpo,
+    'Regla de los 2 cm de la unión esofagogástrica con tres tumores: el que afecta a la unión con el centro a 2 cm o menos se estadifica como esófago; el que no toca la unión o tiene el centro a más de 2 cm, como estómago',
+    pie,
+  )
 }
 
 /** Despacha un paso { dibujo: { tipo, ...opciones } } del contenido. */
@@ -321,5 +378,5 @@ export function dibujo({ tipo, organo, ...opciones }) {
   if (tipo === 'recorrido') return recorrido()
   if (tipo === 'residuo') return residuo()
   if (tipo === 'union') return union(opciones)
-  return ''
+  return dibujoEsquema({ tipo, organo, ...opciones }) || dibujoSeminario({ tipo, organo, ...opciones })
 }

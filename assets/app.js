@@ -2,14 +2,21 @@ import { CHULETA } from './contenido.js'
 import { TODAS } from './orden.js'
 import { CATEGORIAS, estadio } from './estadios.js'
 import {
-  MODULOS, NOMBRE_ORGANO, esc, mazoDe, mazoRepaso, pendientesDeRepaso, pendiente, preguntasDe, idRespuesta, htmlCarta,
+  MODULOS, MODULOS_TUMOR, NOMBRE_ORGANO, buscarModulo, esc, mazoDe, mazoRepaso, pendientesDeRepaso, pendiente, preguntasDe, idRespuesta, htmlCarta,
 } from './mazo.js'
+import { PREGUNTAS_TUMORES } from './tumores/index.js'
+import { vistaTnm, vistaTnmDetalle } from './vista-tnm.js'
+import { vistaTumores, vistaFicha, saltarABloque } from './vista-tumores.js'
+import {
+  abrirTarjetas, cerrarTarjetas, enTarjetas, clicTarjetas, teclaTarjetas, deslizarTarjetas, abrirReto, cerrarReto, enReto, clicReto,
+} from './tarjetas.js'
 import {
   leer, guardarRespuesta, guardarConstruccion, guardarPosicion, borrarModulo, olvidarRespuestas, borrarTodo, preferencia,
 } from './progreso.js'
 
 const app = document.querySelector('#app')
 const MODULO_REPASO = { id: 'repaso', tipo: 'repaso', fuente: null, titulo: 'Repaso' }
+const MODULO_REPASO_TUMORES = { id: 'repaso-tumores', tipo: 'repaso', fuente: null, titulo: 'Repaso' }
 const DESLIZ_MINIMO = 60
 
 /* ================================================================== */
@@ -75,16 +82,17 @@ let mazo = null // { modulo, cartas, i, seleccion, borrador, direccion }
 
 function abrirModulo(id) {
   const progreso = leer()
-  if (id === 'repaso') {
-    const preguntas = pendientesDeRepaso(progreso)
+  if (id === 'repaso' || id === 'repaso-tumores') {
+    const deTumores = id === 'repaso-tumores'
+    const preguntas = pendientesDeRepaso(progreso, deTumores ? PREGUNTAS_TUMORES : undefined)
     if (!preguntas.length) {
-      location.hash = '#/'
+      location.hash = deTumores ? '#/tumores' : '#/'
       return
     }
     olvidarRespuestas(preguntas.map((p) => `r:${p.id}`))
-    mazo = { modulo: MODULO_REPASO, cartas: mazoRepaso(preguntas), i: 0 }
+    mazo = { modulo: deTumores ? MODULO_REPASO_TUMORES : MODULO_REPASO, cartas: mazoRepaso(preguntas), i: 0 }
   } else {
-    const modulo = MODULOS.find((m) => m.id === id)
+    const modulo = buscarModulo(id)
     if (!modulo) {
       location.hash = '#/'
       return
@@ -98,9 +106,17 @@ function abrirModulo(id) {
 }
 
 function siguienteModulo() {
-  if (mazo.modulo.id === 'repaso') return null
-  const i = MODULOS.findIndex((m) => m.id === mazo.modulo.id)
-  return MODULOS[i + 1] ?? null
+  if (mazo.modulo.tipo === 'repaso') return null
+  const lista = mazo.modulo.tipo === 'tumor' ? MODULOS_TUMOR : MODULOS
+  const i = lista.findIndex((m) => m.id === mazo.modulo.id)
+  return lista[i + 1] ?? null
+}
+
+/** Adónde lleva la ✕ del mazo: a la pantalla desde la que se entra. */
+function origenDelMazo() {
+  if (mazo.modulo.tipo === 'tumor') return `#/tumor/${mazo.modulo.fuente.id}`
+  if (mazo.modulo.id === 'repaso-tumores') return '#/tumores'
+  return '#/'
 }
 
 /** Aciertos seguidos hasta la carta actual. */
@@ -136,7 +152,7 @@ function pintarMazo() {
   const progreso = leer()
   const { cartas, i, modulo } = mazo
   const carta = cartas[i]
-  if (modulo.id !== 'repaso') guardarPosicion(modulo.id, i)
+  if (modulo.tipo !== 'repaso') guardarPosicion(modulo.id, i)
   const r = racha(progreso)
   const segmentos = cartas
     .map((c, k) => `<span class="${k < i ? 'hecho' : k === i ? 'actual' : ''}${c.pregunta || c.tipo === 'construir' ? ' interactivo' : ''}"></span>`)
@@ -144,7 +160,7 @@ function pintarMazo() {
   app.innerHTML = `
     <div class="mazo">
       <header class="mazo-cabeza">
-        <a href="#/" class="cerrar" aria-label="Volver al inicio">✕</a>
+        <a href="${origenDelMazo()}" class="cerrar" aria-label="Salir">✕</a>
         <div class="segmentos" role="progressbar" aria-valuemin="1" aria-valuemax="${cartas.length}" aria-valuenow="${i + 1}">${segmentos}</div>
         <span class="racha ${r >= 2 ? 'visible' : ''}" aria-label="Racha de ${r} aciertos">×${r}</span>
       </header>
@@ -275,7 +291,18 @@ function clicEnMazo(t) {
 
 app.addEventListener('click', (e) => {
   const t = e.target
+  if (clicTarjetas(app, t) || clicReto(app, t)) return
   if (mazo && clicEnMazo(t)) return
+  if (t.closest('[data-imprimir]')) {
+    window.print()
+    return
+  }
+  const salto = t.closest('[data-salto]')
+  if (salto) {
+    e.preventDefault()
+    saltarABloque(salto.dataset.salto)
+    return
+  }
   const calcChip = t.closest('[data-calc] .chip')
   if (calcChip) {
     calc = { ...calc, [calcChip.parentElement.dataset.calc]: calcChip.dataset.valor }
@@ -296,7 +323,12 @@ app.addEventListener('click', (e) => {
 })
 
 document.addEventListener('keydown', (e) => {
-  if (!mazo || e.metaKey || e.ctrlKey || e.altKey) return
+  if (e.metaKey || e.ctrlKey || e.altKey) return
+  if (enTarjetas() && teclaTarjetas(app, e.key)) {
+    e.preventDefault()
+    return
+  }
+  if (!mazo) return
   const carta = mazo.cartas[mazo.i]
   if (e.key === 'ArrowRight') {
     if (puedeAvanzar()) ir(mazo.i + 1)
@@ -311,18 +343,23 @@ let toque = null
 app.addEventListener(
   'touchstart',
   (e) => {
-    toque = e.target.closest('.carta') ? { x: e.touches[0].clientX, y: e.touches[0].clientY } : null
+    toque = e.target.closest('.carta, .zona-tarjeta') ? { x: e.touches[0].clientX, y: e.touches[0].clientY } : null
   },
   { passive: true },
 )
 app.addEventListener(
   'touchend',
   (e) => {
-    if (!toque || !mazo) return
+    if (!toque) return
     const dx = e.changedTouches[0].clientX - toque.x
     const dy = e.changedTouches[0].clientY - toque.y
     toque = null
     if (Math.abs(dx) < DESLIZ_MINIMO || Math.abs(dy) > Math.abs(dx)) return
+    if (enTarjetas()) {
+      deslizarTarjetas(app, dx)
+      return
+    }
+    if (!mazo) return
     if (dx < 0 && puedeAvanzar()) ir(mazo.i + 1)
     if (dx > 0) ir(mazo.i - 1)
   },
@@ -333,13 +370,32 @@ app.addEventListener(
 /* Rutas                                                               */
 /* ================================================================== */
 
+const PESTANA = { '': 'seminario', m: 'seminario', chuleta: 'seminario', calculadora: 'seminario', tnm: 'tnm', reto: 'tnm', tumores: 'tumores', tumor: 'tumores' }
+
+function marcarPestana(ruta, extra) {
+  const activa = ruta === 'tarjetas' ? (extra === 'tumor' ? 'tumores' : 'tnm') : PESTANA[ruta] ?? 'seminario'
+  document.querySelectorAll('[data-pestana]').forEach((a) => a.setAttribute('aria-current', a.dataset.pestana === activa ? 'page' : 'false'))
+}
+
 function enrutar() {
-  const [, ruta, id] = (location.hash || '#/').split('/')
+  const [, ruta = '', id, extra = ''] = (location.hash || '#/').split('/')
+  marcarPestana(ruta, id)
+  cerrarTarjetas()
+  cerrarReto()
   if (ruta === 'm' && id) return abrirModulo(id)
   mazo = null
+  document.body.classList.remove('en-mazo')
+  if (ruta === 'tarjetas' && abrirTarjetas(app, id, extra, location.hash.split('/')[4] ?? '')) return window.scrollTo(0, 0)
+  if (ruta === 'reto' && abrirReto(app, id)) return window.scrollTo(0, 0)
   if (ruta === 'chuleta') vistaChuleta()
   else if (ruta === 'calculadora') vistaCalculadora()
-  else vistaInicio()
+  else if (ruta === 'tnm' && id) vistaTnmDetalle(app, id) || vistaTnm(app)
+  else if (ruta === 'tnm') vistaTnm(app)
+  else if (ruta === 'tumor' && id) vistaFicha(app, id) || vistaTumores(app)
+  else if (ruta === 'tumores') {
+    vistaTumores(app)
+    if (id) return requestAnimationFrame(() => saltarABloque(id))
+  } else vistaInicio()
   window.scrollTo(0, 0)
 }
 

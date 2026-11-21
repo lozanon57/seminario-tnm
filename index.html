@@ -5,7 +5,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
   <meta name="theme-color" content="#f5f4f0" media="(prefers-color-scheme: light)">
   <meta name="theme-color" content="#0d0d12" media="(prefers-color-scheme: dark)">
-  <meta name="description" content="Seminario de TNM para estudiantes de Medicina: historia, reglas y ocho casos de cáncer gástrico y de colon.">
+  <meta name="description" content="TNM paso a paso: seminario de estadificación, TNM para memorizar y fichas de estudio de los tumores abdominales de Patología Quirúrgica I.">
   <meta name="robots" content="noindex">
   <title>TNM paso a paso</title>
   <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -17,11 +17,12 @@
 <body>
   <header class="barra">
     <a href="#/" class="marca">TNM <span>paso a paso</span></a>
-    <nav>
-      <a href="#/chuleta">Chuleta</a>
-      <a href="#/calculadora">Calculadora</a>
-      <button id="letra" class="sutil" type="button" aria-pressed="false" title="Letra grande para proyectar">Aa</button>
+    <nav class="pestanas" aria-label="Secciones">
+      <a href="#/" data-pestana="seminario"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M3 5h18v11H3zM8 20h8M12 16v4"/></svg><span>Seminario</span></a>
+      <a href="#/tnm" data-pestana="tnm"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M4 7l8-4 8 4-8 4zM4 12l8 4 8-4M4 17l8 4 8-4"/></svg><span>TNM puro</span></a>
+      <a href="#/tumores" data-pestana="tumores"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M5 4h11a3 3 0 0 1 3 3v13H8a3 3 0 0 1-3-3zM5 17a3 3 0 0 1 3-3h11"/></svg><span>Tumores</span></a>
     </nav>
+    <button id="letra" class="sutil" type="button" aria-pressed="false" title="Letra grande para proyectar">Aa</button>
   </header>
   <main id="app" tabindex="-1"><p class="cargando">Cargando…</p></main>
   <script type="module" src="assets/app.js"></script>

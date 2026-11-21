@@ -1,4 +1,5 @@
 import { BLOQUES, CASOS, ORDENADAS } from './contenido.js'
+import { PREGUNTAS_TUMORES } from './tumores/index.js'
 
 /** Todas las preguntas, en el orden en que aparecen en el seminario. */
 export const TODAS = [...BLOQUES.flatMap((b) => b.preguntas), ...CASOS.flatMap((c) => c.pasos.filter((p) => p.pregunta).map((p) => p.pregunta))]
@@ -18,12 +19,12 @@ const hash = (texto) => {
  * equilibrado en conjunto y además mezclado dentro de cada bloque. Es
  * determinista, de modo que todos los móviles ven lo mismo que el proyector.
  */
-export const ORDEN = (() => {
+function ordenar(preguntas, fijas = new Set()) {
   const uso = [0, 0, 0, 0]
   const orden = new Map()
-  for (const p of TODAS) {
+  for (const p of preguntas) {
     const indices = p.opciones.map((_, i) => i)
-    if (ORDENADAS.has(p.id)) {
+    if (fijas.has(p.id)) {
       uso[p.correcta]++
       orden.set(p.id, indices)
       continue
@@ -36,4 +37,10 @@ export const ORDEN = (() => {
     orden.set(p.id, [...resto.slice(0, destino), p.correcta, ...resto.slice(destino)])
   }
   return orden
-})()
+}
+
+/**
+ * Las del seminario se ordenan aparte y primero, para que su clave (la del
+ * anexo A del guion) no cambie al añadir preguntas de la pestaña «Tumores».
+ */
+export const ORDEN = new Map([...ordenar(TODAS, ORDENADAS), ...ordenar(PREGUNTAS_TUMORES)])

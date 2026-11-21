@@ -8,6 +8,8 @@ import { BLOQUES, CASOS, CHULETA } from './contenido.js'
 import { TODAS, ORDEN } from './orden.js'
 import { CATEGORIAS, estadio } from './estadios.js'
 import { dibujo } from './dibujos.js'
+import { htmlSeguro } from './dibujos-base.js'
+import { TUMORES } from './tumores/index.js'
 
 export const NOMBRE_ORGANO = { estomago: 'Estómago', colon: 'Colon' }
 
@@ -32,8 +34,13 @@ export const MODULOS = [
   ...CASOS.map((c) => ({ id: c.id, tipo: 'caso', fuente: c, numero: c.numero, titulo: c.titulo })),
 ]
 
+/** Las fichas de la pestaña «Tumores» también se estudian como mazo. */
+export const MODULOS_TUMOR = TUMORES.map((t, i) => ({ id: `t-${t.id}`, tipo: 'tumor', fuente: t, numero: i + 1, titulo: t.titulo }))
+
+export const buscarModulo = (id) => MODULOS.find((m) => m.id === id) ?? MODULOS_TUMOR.find((m) => m.id === id)
+
 export function preguntasDe(modulo) {
-  if (modulo.tipo === 'bloque') return modulo.fuente.preguntas
+  if (modulo.tipo === 'bloque' || modulo.tipo === 'tumor') return modulo.fuente.preguntas
   return modulo.fuente.pasos.filter((p) => p.pregunta).map((p) => p.pregunta)
 }
 
@@ -44,11 +51,15 @@ export function preguntasDe(modulo) {
 export function mazoDe(modulo) {
   const f = modulo.fuente
   const cartas = [{ tipo: 'portada' }]
-  if (modulo.tipo === 'bloque') {
+  if (modulo.tipo === 'tumor') {
+    cartas.push({ tipo: 'esencial', puntos: f.esencial, dibujos: [{ tipo: 'mapa', resaltar: f.mapa }] })
+    for (const s of f.secciones) cartas.push({ tipo: 'seccion', titulo: s.titulo, puntos: s.puntos, dibujos: s.dibujo ? [s.dibujo].flat() : [] })
+    for (const pregunta of f.preguntas) cartas.push({ tipo: 'pregunta', pregunta })
+  } else if (modulo.tipo === 'bloque') {
     for (const p of f.lamina) {
       const ultima = cartas.at(-1)
       if (typeof p === 'string') cartas.push({ tipo: 'idea', html: p, dibujos: [] })
-      else if (ultima.tipo === 'idea') ultima.dibujos.push(p.dibujo)
+      else if (ultima.tipo === 'idea' && !p.aparte) ultima.dibujos.push(p.dibujo)
       else cartas.push({ tipo: 'idea', html: '', dibujos: [p.dibujo] })
     }
     for (const pregunta of f.preguntas) cartas.push({ tipo: 'pregunta', pregunta })
@@ -76,8 +87,8 @@ export function mazoDe(modulo) {
 }
 
 /** Preguntas para repasar: falladas o acertadas sin estar seguro. */
-export function pendientesDeRepaso(progreso) {
-  return TODAS.filter((p) => {
+export function pendientesDeRepaso(progreso, lista = TODAS) {
+  return lista.filter((p) => {
     const r = progreso.respuestas[p.id]
     if (!r) return false
     const flojo = r.opcion !== p.correcta || !r.seguro
@@ -132,7 +143,7 @@ function htmlOpciones(carta, progreso, seleccion) {
           : ''
     veredicto = `<div class="veredicto ${acierto ? 'bien' : 'mal'}" role="status">
       <p class="titular">${acierto ? 'Correcto' : `Era la ${'ABCD'[orden.indexOf(p.correcta)]}`}</p>
-      <p>${esc(p.explicacion)}</p>${matiz}</div>`
+      <p>${esc(p.explicacion)}</p>${matiz}${p.dibujo ? dibujo(p.dibujo) : ''}</div>`
   }
   return `<p class="enunciado">${esc(p.enunciado)}</p><ol class="opciones">${opciones}</ol>${veredicto}`
 }
@@ -189,24 +200,31 @@ function htmlResumen(cartas, progreso, modulo, siguiente) {
   const bien = respuestas.filter((x) => x.r.opcion === x.c.pregunta.correcta).length
   const seguroMal = respuestas.filter((x) => x.r.opcion !== x.c.pregunta.correcta && x.r.seguro).length
   const total = preguntas.length || 1
-  const clave = modulo.fuente?.clave
+  const clave = modulo.fuente?.clave ?? modulo.fuente?.esencial?.[0]
+  const inicio = modulo.tipo === 'tumor' || modulo.id === 'repaso-tumores' ? '#/tumores' : '#/'
+  const etiquetaSiguiente = (m) => (m.tipo === 'caso' ? `Caso ${m.numero}` : m.tipo === 'tumor' ? 'Siguiente' : `Bloque ${m.numero}`)
   return `<div class="resumen">
     ${anillo(bien / total)}
     <p class="cifras"><b>${bien}</b> de ${preguntas.length} acertadas${seguroMal ? ` · <b>${seguroMal}</b> fallada${seguroMal === 1 ? '' : 's'} estando seguro` : ''}</p>
     ${clave ? `<div class="clave"><p class="rotulo">Para llevarte</p><p>${esc(clave)}</p></div>` : ''}
     <div class="acciones">
-      ${siguiente ? `<a class="boton primario" href="#/m/${siguiente.id}">${siguiente.tipo === 'caso' ? `Caso ${siguiente.numero}` : `Bloque ${siguiente.numero}`}: ${esc(siguiente.titulo)} →</a>` : ''}
-      ${modulo.id !== 'repaso' ? '<button type="button" class="boton" data-repetir>Repetir este módulo</button>' : ''}
-      <a class="boton" href="#/">Volver al inicio</a>
+      ${siguiente ? `<a class="boton primario" href="#/m/${siguiente.id}">${etiquetaSiguiente(siguiente)}: ${esc(siguiente.titulo)} →</a>` : ''}
+      ${modulo.tipo === 'tumor' ? `<a class="boton" href="#/tarjetas/tumor/${modulo.fuente.id}">Repasar con tarjetas</a>` : ''}
+      ${!modulo.id.startsWith('repaso') ? '<button type="button" class="boton" data-repetir>Repetir este módulo</button>' : ''}
+      <a class="boton" href="${inicio}">Volver al inicio</a>
     </div></div>`
 }
 
 function htmlPortada(modulo, cartas) {
   const f = modulo.fuente
   const n = cartas.filter((c) => c.pregunta || c.tipo === 'construir').length
-  if (modulo.id === 'repaso') {
+  if (modulo.id.startsWith('repaso')) {
     return `<div class="portada-carta"><p class="sobre">Repaso</p><h1>Lo que aún no tienes seguro</h1>
       <p class="sub">${n} pregunta${n === 1 ? '' : 's'} que fallaste o acertaste intuyendo. Cuando las aciertes estando seguro, salen del repaso.</p></div>`
+  }
+  if (modulo.tipo === 'tumor') {
+    return `<div class="portada-carta"><p class="sobre">Tumores · ${esc(f.subtitulo)}</p><h1>${esc(f.titulo)}</h1>
+      <p class="meta">${f.secciones.length} ideas · ${n} preguntas</p></div>`
   }
   const sobre = modulo.tipo === 'caso' ? `Caso ${modulo.numero} · ${NOMBRE_ORGANO[f.organo]}` : `Bloque ${modulo.numero}`
   return `<div class="portada-carta"><p class="sobre">${sobre}</p><h1>${esc(f.titulo)}</h1>
@@ -226,6 +244,10 @@ export function htmlCarta(carta, ctx) {
       return htmlPortada(modulo, cartas)
     case 'idea':
       return `${carta.html ? `<p class="idea">${carta.html}</p>` : ''}${dibujos(carta.dibujos)}`
+    case 'esencial':
+      return `<p class="sobre">Lo esencial</p><ol class="esencial">${carta.puntos.map((p) => `<li>${htmlSeguro(p)}</li>`).join('')}</ol>${dibujos(carta.dibujos)}`
+    case 'seccion':
+      return `<p class="sobre">${esc(carta.titulo)}</p><ul class="puntos">${carta.puntos.map((p) => `<li>${htmlSeguro(p)}</li>`).join('')}</ul>${dibujos(carta.dibujos)}`
     case 'relato':
       return `<p class="relato">${esc(carta.texto)}</p>${dibujos(carta.dibujos)}${
         carta.pregunta ? `<div class="bloque-pregunta">${htmlOpciones(carta, progreso, ctx.seleccion)}</div>` : ''

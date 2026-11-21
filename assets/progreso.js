@@ -9,7 +9,7 @@
  * «seguro y fallada» es la que más conviene repasar.
  */
 const CLAVE = 'seminario-tnm.v2'
-const vacio = () => ({ respuestas: {}, construcciones: {}, posiciones: {}, preferencias: {} })
+const vacio = () => ({ respuestas: {}, construcciones: {}, posiciones: {}, tarjetas: {}, preferencias: {} })
 
 function cargar() {
   try {
@@ -60,6 +60,17 @@ export function borrarModulo(modulo, idsPreguntas, casoId) {
 export function olvidarRespuestas(ids) {
   const respuestas = Object.fromEntries(Object.entries(estado.respuestas).filter(([id]) => !ids.includes(id)))
   escribir({ ...estado, respuestas })
+}
+
+/** Tarjetas de memoria: si el alumno dice que ya se la sabe. */
+export function guardarTarjeta(id, sabida) {
+  const previa = estado.tarjetas[id]
+  escribir({ ...estado, tarjetas: { ...estado.tarjetas, [id]: { sabida, vistas: (previa?.vistas ?? 0) + 1 } } })
+}
+
+export function olvidarTarjetas(ids) {
+  const tarjetas = Object.fromEntries(Object.entries(estado.tarjetas).filter(([id]) => !ids.includes(id)))
+  escribir({ ...estado, tarjetas })
 }
 
 export function borrarTodo() {
